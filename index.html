@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>富邦中辰 × 職涯探索計畫</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #00B5A3;
+    --teal-dark: #009688;
+    --teal-light: #E0F7F5;
+    --blue: #1A73C8;
+    --blue-dark: #1558A0;
+    --blue-light: #EBF4FF;
+    --green-selected: #D6F5EE;
+    --green-border: #00B5A3;
+    --text-dark: #1A1A2E;
+    --text-mid: #4A5568;
+    --text-light: #718096;
+    --bg: #F0F4F8;
+    --white: #FFFFFF;
+    --border: #D1DCE8;
+    --red: #E53E3E;
+    --rank1: #00B5A3;
+    --rank2: #1A73C8;
+    --rank3: #7C3AED;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  /* ── Card Shell ── */
+  .card {
+    background: var(--white);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 480px;
+    min-height: 600px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── Progress Bar Area ── */
+  .progress-area {
+    padding: 14px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .progress-label { font-size: 13px; color: var(--text-mid); font-weight: 500; }
+  .progress-count { font-size: 13px; color: var(--blue); font-weight: 700; }
+  .progress-bar-wrap {
+    height: 6px;
+    background: #E2EAF4;
+    border-radius: 99px;
+    margin: 8px 20px 0;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--blue));
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── Back Button ── */
+  .back-btn {
+    margin: 12px 20px 0;
+    background: #F0F4F8;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--text-mid);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    width: fit-content;
+    display: flex; align-items: center; gap: 6px;
+    transition: background 0.2s;
+  }
+  .back-btn:hover { background: #E2EAF4; }
+
+  /* ── Content Area ── */
+  .content {
+    flex: 1;
+    padding: 16px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* ── Part Badge ── */
+  .part-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    width: fit-content;
+  }
+  .part-badge.teal { background: #E0F7F5; color: var(--teal-dark); }
+  .part-badge.blue { background: var(--blue-light); color: var(--blue-dark); }
+  .part-badge.purple { background: #EDE9FE; color: #5B21B6; }
+  .part-badge.orange { background: #FFF3E0; color: #E65100; }
+  .part-badge.green { background: #E8F5E9; color: #2E7D32; }
+
+  /* ── Question ── */
+  .q-number { font-size: 12px; color: var(--text-light); font-weight: 500; }
+  .q-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+  .q-hint {
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .q-type-badge {
+    font-size: 11px;
+    background: #F0F4F8;
+    color: var(--text-light);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-weight: 500;
+  }
+
+  /* ── Options ── */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  .option {
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 500;
+    background: var(--white);
+    transition: all 0.18s ease;
+    position: relative;
+    user-select: none;
+  }
+  .option:hover { border-color: var(--teal); background: #F6FFFE; }
+  .option.selected {
+    border-color: var(--green-border);
+    background: var(--green-selected);
+    color: var(--teal-dark);
+  }
+  .option .opt-letter {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: #F0F4F8;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    color: var(--text-mid);
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+  .option.selected .opt-letter {
+    background: var(--teal);
+    color: white;
+  }
+  .option .check-icon {
+    margin-left: auto;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: white;
+    display: none;
+    align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .option.selected .check-icon { display: flex; }
+
+  /* rank badges */
+  .rank-badge {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    margin-left: auto;
+    flex-shrink: 0;
+    color: white;
+  }
+  .rank-badge.r1 { background: var(--rank1); }
+  .rank-badge.r2 { background: var(--rank2); }
+  .rank-badge.r3 { background: var(--rank3); }
+
+  /* rank done label */
+  .rank-done-label {
+    font-size: 12px;
+    color: var(--teal-dark);
+    font-weight: 700;
+    text-align: right;
+    margin-top: -4px;
+  }
+
+  /* ── Textarea ── */
+  textarea {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-dark);
+    resize: none;
+    min-height: 130px;
+    transition: border-color 0.2s;
+    background: #FAFCFF;
+  }
+  textarea:focus { outline: none; border-color: var(--teal); }
+  textarea::placeholder { color: #A0AEC0; }
+
+  /* ── Input fields ── */
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label {
+    font-size: 13px; font-weight: 700; color: var(--text-dark);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .form-label .req { color: var(--red); }
+  input[type="text"] {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-dark);
+    background: #FAFCFF;
+    transition: border-color 0.2s;
+  }
+  input[type="text"]:focus { outline: none; border-color: var(--teal); }
+  input[type="text"]::placeholder { color: #A0AEC0; }
+
+  /* ── Next / Submit Button ── */
+  .next-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: auto;
+  }
+  .next-btn.teal-btn {
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    color: white;
+  }
+  .next-btn.blue-btn {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    color: white;
+  }
+  .next-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .next-btn:active { transform: translateY(0); }
+  .next-btn:disabled {
+    background: #CBD5E0;
+    color: #A0AEC0;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ── Cover / Part Intro ── */
+  .cover-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .cover-hero {
+    background: linear-gradient(145deg, #00B5A3, #1A73C8);
+    border-radius: 16px;
+    margin: 0 20px;
+    padding: 32px 24px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+  .cover-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .cover-hero .emoji { font-size: 40px; margin-bottom: 12px; }
+  .cover-hero h1 { font-size: 22px; font-weight: 900; line-height: 1.4; }
+  .cover-hero p { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+
+  .cover-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 20px 20px 0;
+    padding: 16px;
+    background: #F0F4F8;
+    border-radius: 14px;
+  }
+  .stat-item { text-align: center; }
+  .stat-value { font-size: 22px; font-weight: 900; color: var(--blue); }
+  .stat-label { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+  .cover-desc {
+    margin: 0 20px;
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+  .cover-desc a { color: var(--blue); text-decoration: underline; cursor: pointer; }
+
+  /* Part intro hero (colored) */
+  .part-intro-hero {
+    border-radius: 16px;
+    margin: 0 20px;
+    padding: 40px 24px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .part-intro-hero::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+  }
+  .part-intro-hero .emoji { font-size: 36px; margin-bottom: 12px; }
+  .part-intro-hero h2 { font-size: 22px; font-weight: 900; }
+  .part-intro-hero .sub { font-size: 14px; opacity: 0.85; margin-top: 6px; }
+
+  /* ── Screen transitions ── */
+  .screen {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    animation: fadeIn 0.3s ease;
+  }
+  .screen.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ── Success screen ── */
+  .success-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    gap: 16px;
+  }
+  .success-icon {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @keyframes popIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+  .success-title { font-size: 22px; font-weight: 900; color: var(--text-dark); }
+  .success-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+
+  /* ── Error msg ── */
+  .error-msg {
+    font-size: 12px;
+    color: var(--red);
+    display: none;
+    margin-top: -8px;
+  }
+
+  /* ── Loading overlay ── */
+  .loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.8);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--teal-dark);
+    font-weight: 700;
+  }
+  .loading-overlay.show { display: flex; }
+  .spinner {
+    width: 40px; height: 40px;
+    border: 4px solid #E2EAF4;
+    border-top-color: var(--teal);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* limit notice */
+  .limit-notice {
+    font-size: 12px; color: var(--text-light);
+    text-align: right; margin-top: -8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <span>提交中，請稍候…</span>
+</div>
+
+<div class="card">
+
+  <!-- ════════════════ SCREEN 0: Cover ════════════════ -->
+  <div class="screen active" id="screen-0">
+    <div class="cover-card">
+      <div style="padding: 20px 20px 0; display:flex; gap:8px; align-items:center;">
+        <span style="font-size:12px; font-weight:700; color:var(--text-light);">富邦中辰 × 職涯探索計畫</span>
+      </div>
+      <div class="content" style="gap:16px;">
+        <div class="cover-hero">
+          <div class="emoji">💎</div>
+          <h1>你知道自己在職場上<br>最值錢的特質是什麼嗎？</h1>
+          <p>結合性格分析與工作價值觀，找出職場優勢與適合的職涯方向。</p>
+        </div>
+        <div class="cover-stats">
+          <div class="stat-item">
+            <div class="stat-value">5</div>
+            <div class="stat-label">分鐘</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">16</div>
+            <div class="stat-label">問題數量</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">1</div>
+            <div class="stat-label">專屬報告</div>
+          </div>
+        </div>
+        <p class="cover-desc">
+          不管你有沒有想過金融業或業務相關工作，這份測驗都值得你花 5 分鐘完成。<br><br>
+          <a>填完後你會拿到一份專屬的職涯分析報告。</a>
+        </p>
+        <button class="next-btn teal-btn" onclick="goTo(1)">開始測驗 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 1: 基本資料 ════════════════ -->
+  <div class="screen" id="screen-1">
+    <div style="padding: 20px 20px 0; display:flex; gap:8px; align-items:center;">
+      <span class="part-badge teal">📋 基本資料</span>
+    </div>
+    <div class="content">
+      <div>
+        <div style="font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:4px;">請先填寫以下資訊</div>
+        <div style="font-size:13px; color:var(--text-light);">填寫基本資料有助於讓你的報告內容更精準</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div class="form-group">
+          <label class="form-label">就讀學校 <span class="req">*</span></label>
+          <input type="text" id="f_school" placeholder="例：台灣大學">
+        </div>
+        <div class="form-group">
+          <label class="form-label">科系 <span class="req">*</span></label>
+          <input type="text" id="f_dept" placeholder="例：財務金融系">
+        </div>
+        <div class="form-group">
+          <label class="form-label">年級 <span class="req">*</span></label>
+          <input type="text" id="f_grade" placeholder="例：大三">
+        </div>
+        <div class="form-group">
+          <label class="form-label">MBTI（選填）</label>
+          <input type="text" id="f_mbti" placeholder="例：INTJ、ENFP，若不清楚可略過">
+        </div>
+        <div id="basic-error" class="error-msg">請填寫必填欄位（學校、科系、年級）</div>
+      </div>
+      <button class="next-btn blue-btn" onclick="submitBasic()">填好了，開始測驗 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 2: PART 1 Intro ════════════════ -->
+  <div class="screen" id="screen-2">
+    <button class="back-btn" onclick="goTo(1)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你重視什麼？</span>
+      <span class="progress-count">1 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:6%"></div></div>
+    <div class="content" style="justify-content:center; gap:20px;">
+      <div class="part-intro-hero" style="background: linear-gradient(135deg,#00B5A3,#009688);">
+        <div class="emoji">💎</div>
+        <h2>PART 1｜你重視什麼？</h2>
+        <div class="sub">工作價值觀</div>
+      </div>
+      <button class="next-btn teal-btn" onclick="goTo(3)">開始作答 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 3: Q1 ════════════════ -->
+  <div class="screen" id="screen-3">
+    <button class="back-btn" onclick="goTo(2)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你重視什麼？</span>
+      <span class="progress-count">1 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:6%"></div></div>
+    <div class="content">
+      <span class="part-badge teal">💎 PART 1｜你重視什麼？</span>
+      <div class="q-number">Q1</div>
+      <div class="q-text">如果工作性質可以自己選，你最在意哪個？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q1">
+        <div class="option" onclick="selectSingle('q1','A',this)"><span class="opt-letter">A</span>工作時間穩定，下班就是下班<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q1','B',this)"><span class="opt-letter">B</span>做出成績，會被看見、會被肯定<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q1','C',this)"><span class="opt-letter">C</span>收入有機會隨付出而大幅成長<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q1','D',this)"><span class="opt-letter">D</span>工作內容是我真正有興趣的事<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q1" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn teal-btn" onclick="nextQ('q1',4)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 4: Q2 ════════════════ -->
+  <div class="screen" id="screen-4">
+    <button class="back-btn" onclick="goTo(3)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你重視什麼？</span>
+      <span class="progress-count">2 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:12%"></div></div>
+    <div class="content">
+      <span class="part-badge teal">💎 PART 1｜你重視什麼？</span>
+      <div class="q-number">Q2</div>
+      <div class="q-text">你對「收入不固定、靠自己真實決定薪水」這件事，直覺反應是？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q2">
+        <div class="option" onclick="selectSingle('q2','A',this)"><span class="opt-letter">A</span>很抗拒，我需要穩定與安全感<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q2','B',this)"><span class="opt-letter">B</span>有點擔心，但如果上限高我願意試試<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q2','C',this)"><span class="opt-letter">C</span>還好，我本來就對自己有信心<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q2','D',this)"><span class="opt-letter">D</span>很嚮往，穩定薪水反而讓我沒動力<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q2" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn teal-btn" onclick="nextQ('q2',5)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 5: Q3 ════════════════ -->
+  <div class="screen" id="screen-5">
+    <button class="back-btn" onclick="goTo(4)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你重視什麼？</span>
+      <span class="progress-count">3 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:18%"></div></div>
+    <div class="content">
+      <span class="part-badge teal">💎 PART 1｜你重視什麼？</span>
+      <div class="q-number">Q3</div>
+      <div class="q-text">你理想中「有成就感的時刻」最像哪一個？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q3">
+        <div class="option" onclick="selectSingle('q3','A',this)"><span class="opt-letter">A</span>完成一個複雜的專案，看到完整成果<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q3','B',this)"><span class="opt-letter">B</span>幫助某人解決了一個真實的困難<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q3','C',this)"><span class="opt-letter">C</span>說服別人接受我的想法或建議<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q3','D',this)"><span class="opt-letter">D</span>學到新東西，感覺自己變強了<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q3" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn teal-btn" onclick="nextQ('q3',6)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 6: Q4 排序 ════════════════ -->
+  <div class="screen" id="screen-6">
+    <button class="back-btn" onclick="goTo(5)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你重視什麼？</span>
+      <span class="progress-count">4 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:25%"></div></div>
+    <div class="content">
+      <span class="part-badge teal">💎 PART 1｜你重視什麼？</span>
+      <div class="q-number">Q4</div>
+      <div class="q-text">請將以下工作條件，依照重視程度選出前三名</div>
+      <div class="q-hint">👆 依你點選最重視的 3 個條件，點選順序即為排名</div>
+      <div class="options" id="opts-q4">
+        <div class="option" onclick="selectRank('q4','收入高低',this)"><span class="opt-letter" id="letter-q4-0">—</span>收入高低<span class="rank-badge" id="rank-q4-0" style="display:none"></span></div>
+        <div class="option" onclick="selectRank('q4','時間自由度',this)"><span class="opt-letter" id="letter-q4-1">—</span>時間自由度<span class="rank-badge" id="rank-q4-1" style="display:none"></span></div>
+        <div class="option" onclick="selectRank('q4','工作穩定性',this)"><span class="opt-letter" id="letter-q4-2">—</span>工作穩定性<span class="rank-badge" id="rank-q4-2" style="display:none"></span></div>
+        <div class="option" onclick="selectRank('q4','成就感與被肯定',this)"><span class="opt-letter" id="letter-q4-3">—</span>成就感與被肯定<span class="rank-badge" id="rank-q4-3" style="display:none"></span></div>
+        <div class="option" onclick="selectRank('q4','學習與成長空間',this)"><span class="opt-letter" id="letter-q4-4">—</span>學習與成長空間<span class="rank-badge" id="rank-q4-4" style="display:none"></span></div>
+        <div class="option" onclick="selectRank('q4','社會影響力／幫助他人',this)"><span class="opt-letter" id="letter-q4-5">—</span>社會影響力／幫助他人<span class="rank-badge" id="rank-q4-5" style="display:none"></span></div>
+      </div>
+      <div id="rank-done-q4" class="rank-done-label" style="display:none">已選 3/3 ✓ 完成！</div>
+      <div id="err-q4" class="error-msg">請選出前三名</div>
+      <button class="next-btn teal-btn" onclick="nextRank('q4',7)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 7: PART 2 Intro ════════════════ -->
+  <div class="screen" id="screen-7">
+    <button class="back-btn" onclick="goTo(6)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你是什麼樣的人？</span>
+      <span class="progress-count">5 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:31%"></div></div>
+    <div class="content" style="justify-content:center; gap:20px;">
+      <div class="part-intro-hero" style="background: linear-gradient(135deg,#1A73C8,#1558A0);">
+        <div class="emoji">🔍</div>
+        <h2>PART 2｜你是什麼樣的人？</h2>
+        <div class="sub">性格傾向</div>
+      </div>
+      <button class="next-btn blue-btn" onclick="goTo(8)">開始作答 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 8: Q5 ════════════════ -->
+  <div class="screen" id="screen-8">
+    <button class="back-btn" onclick="goTo(7)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你是什麼樣的人？</span>
+      <span class="progress-count">5 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:31%"></div></div>
+    <div class="content">
+      <span class="part-badge blue">🔍 PART 2｜你是什麼樣的人？</span>
+      <div class="q-number">Q5</div>
+      <div class="q-text">朋友通常怎麼形容你？</div>
+      <div class="q-hint">👆 <span class="q-type-badge">多選，最多2個</span></div>
+      <div class="options" id="opts-q5">
+        <div class="option" onclick="selectMulti('q5','很會聊天，跟誰都能熱絡',this,2)"><span class="opt-letter">A</span>很會聊天，跟誰都能熱絡<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectMulti('q5','做事很可靠，交代的事一定完成',this,2)"><span class="opt-letter">B</span>做事很可靠，交代的事一定完成<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectMulti('q5','有自己的想法，不太被影響',this,2)"><span class="opt-letter">C</span>有自己的想法，不太被影響<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectMulti('q5','觀察力強，能感覺到別人的情緒變化',this,2)"><span class="opt-letter">D</span>觀察力強，能感覺到別人的情緒變化<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectMulti('q5','目標感強，做事有衝勁',this,2)"><span class="opt-letter">E</span>目標感強，做事有衝勁<span class="check-icon">✓</span></div>
+      </div>
+      <div class="limit-notice" id="limit-q5">已選 0 / 2</div>
+      <div id="err-q5" class="error-msg">請至少選擇一個選項</div>
+      <button class="next-btn blue-btn" onclick="nextQ('q5',9)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 9: Q6 ════════════════ -->
+  <div class="screen" id="screen-9">
+    <button class="back-btn" onclick="goTo(8)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你是什麼樣的人？</span>
+      <span class="progress-count">6 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:37%"></div></div>
+    <div class="content">
+      <span class="part-badge blue">🔍 PART 2｜你是什麼樣的人？</span>
+      <div class="q-number">Q6</div>
+      <div class="q-text">面對陌生人，你通常？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q6">
+        <div class="option" onclick="selectSingle('q6','A',this)"><span class="opt-letter">A</span>主動開口，我喜歡認識新朋友<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q6','B',this)"><span class="opt-letter">B</span>等對方先說話，但聊開了也很自在<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q6','C',this)"><span class="opt-letter">C</span>有點保留，需要時間才會放鬆<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q6','D',this)"><span class="opt-letter">D</span>依情況，看對方是什麼類型的人<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q6" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn blue-btn" onclick="nextQ('q6',10)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 10: Q7 ════════════════ -->
+  <div class="screen" id="screen-10">
+    <button class="back-btn" onclick="goTo(9)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你是什麼樣的人？</span>
+      <span class="progress-count">7 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:43%"></div></div>
+    <div class="content">
+      <span class="part-badge blue">🔍 PART 2｜你是什麼樣的人？</span>
+      <div class="q-number">Q7</div>
+      <div class="q-text">哪個情境，你覺得自己最得心應手？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q7">
+        <div class="option" onclick="selectSingle('q7','A',this)"><span class="opt-letter">A</span>向一群人報告，台上說明一個提案<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q7','B',this)"><span class="opt-letter">B</span>一對一深談，了解對方的需求和想法<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q7','C',this)"><span class="opt-letter">C</span>獨立研究，整理出一份完整的分析<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q7','D',this)"><span class="opt-letter">D</span>協調多方，讓事情順利往前推進<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q7" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn blue-btn" onclick="nextQ('q7',11)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 11: Q8 ════════════════ -->
+  <div class="screen" id="screen-11">
+    <button class="back-btn" onclick="goTo(10)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你怎麼看工作？</span>
+      <span class="progress-count">8 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:50%"></div></div>
+    <div class="content" style="justify-content:center; gap:20px;">
+      <div class="part-intro-hero" style="background: linear-gradient(135deg,#E53E3E,#C53030);">
+        <div class="emoji">🎯</div>
+        <h2>PART 3｜你怎麼看工作？</h2>
+        <div class="sub">情境題</div>
+      </div>
+      <button class="next-btn" style="background:linear-gradient(135deg,#E53E3E,#C53030);color:white;" onclick="goTo(12)">開始作答 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 12: Q8 情境 ════════════════ -->
+  <div class="screen" id="screen-12">
+    <button class="back-btn" onclick="goTo(11)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你怎麼看工作？</span>
+      <span class="progress-count">8 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:50%"></div></div>
+    <div class="content">
+      <span class="part-badge orange">🎯 PART 3｜你怎麼看工作？</span>
+      <div class="q-number">Q8</div>
+      <div class="q-text">你剛入職一個月，壓力比預期大很多。你會？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q8">
+        <div class="option" onclick="selectSingle('q8','A',this)"><span class="opt-letter">A</span>主動找主管聊，問怎麼調整方向<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q8','B',this)"><span class="opt-letter">B</span>自己研究，找出問題在哪<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q8','C',this)"><span class="opt-letter">C</span>先撐著，觀察同事怎麼做<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q8','D',this)"><span class="opt-letter">D</span>認真評估這份工作適不適合自己繼續<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q8" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn" style="background:linear-gradient(135deg,#E53E3E,#C53030);color:white;" onclick="nextQ('q8',13)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 13: Q9 ════════════════ -->
+  <div class="screen" id="screen-13">
+    <button class="back-btn" onclick="goTo(12)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你怎麼看工作？</span>
+      <span class="progress-count">9 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:56%"></div></div>
+    <div class="content">
+      <span class="part-badge orange">🎯 PART 3｜你怎麼看工作？</span>
+      <div class="q-number">Q9</div>
+      <div class="q-text">你花了周週準備一份提案，最後遭到駁回。你最真實的反應是？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q9">
+        <div class="option" onclick="selectSingle('q9','A',this)"><span class="opt-letter">A</span>很失落，但想知道原因<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q9','B',this)"><span class="opt-letter">B</span>有點生氣，但冷靜後會重整旗鼓<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q9','C',this)"><span class="opt-letter">C</span>很正常，馬上思考下一個提案<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q9','D',this)"><span class="opt-letter">D</span>懷疑這份工作適不適合自己<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q9" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn" style="background:linear-gradient(135deg,#E53E3E,#C53030);color:white;" onclick="nextQ('q9',14)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 14: Q10 ════════════════ -->
+  <div class="screen" id="screen-14">
+    <button class="back-btn" onclick="goTo(13)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">你怎麼看工作？</span>
+      <span class="progress-count">10 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:62%"></div></div>
+    <div class="content">
+      <span class="part-badge orange">🎯 PART 3｜你怎麼看工作？</span>
+      <div class="q-number">Q10</div>
+      <div class="q-text">五年後，你希望自己在職場上的角色是？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q10">
+        <div class="option" onclick="selectSingle('q10','A',this)"><span class="opt-letter">A</span>獨當一面的工作者，靠自己的能力與經驗提高收入<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q10','B',this)"><span class="opt-letter">B</span>帶領一個團隊，培養其他人一起成長<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q10','C',this)"><span class="opt-letter">C</span>還沒想到那麼遠，先把眼前做好<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q10','D',this)"><span class="opt-letter">D</span>往管理或策略方向走，不一定要在第一線<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q10" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn" style="background:linear-gradient(135deg,#E53E3E,#C53030);color:white;" onclick="nextQ('q10',15)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 15: PART 4 Intro ════════════════ -->
+  <div class="screen" id="screen-15">
+    <button class="back-btn" onclick="goTo(14)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">關於業務工作</span>
+      <span class="progress-count">11 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:68%"></div></div>
+    <div class="content" style="justify-content:center; gap:20px;">
+      <div class="part-intro-hero" style="background: linear-gradient(135deg,#1A73C8,#7C3AED);">
+        <div class="emoji">💼</div>
+        <h2>PART 4｜關於業務工作</h2>
+        <div class="sub">你的真實想法</div>
+      </div>
+      <button class="next-btn blue-btn" onclick="goTo(16)">開始作答 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 16: Q11 ════════════════ -->
+  <div class="screen" id="screen-16">
+    <button class="back-btn" onclick="goTo(15)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">關於業務工作</span>
+      <span class="progress-count">11 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:68%"></div></div>
+    <div class="content">
+      <span class="part-badge purple">💼 PART 4｜關於業務工作</span>
+      <div class="q-number">Q11</div>
+      <div class="q-text">說到「業務工作」，你腦中第一個浮現的感覺是？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q11">
+        <div class="option" onclick="selectSingle('q11','A',this)"><span class="opt-letter">A</span>很有挑戰性，但不確定是否能勝任<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q11','B',this)"><span class="opt-letter">B</span>很個性，我不確定自己適不適合<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q11','C',this)"><span class="opt-letter">C</span>或覺得很會說話才能做<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q11','D',this)"><span class="opt-letter">D</span>我從來沒認真考慮過這個方向<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q11','E',this)"><span class="opt-letter">E</span>我本來就有興趣或正在考慮<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q11','F',this)"><span class="opt-letter">F</span>其他<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q11" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn blue-btn" onclick="nextQ('q11',17)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 17: Q12 ════════════════ -->
+  <div class="screen" id="screen-17">
+    <button class="back-btn" onclick="goTo(16)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">關於業務工作</span>
+      <span class="progress-count">12 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:75%"></div></div>
+    <div class="content">
+      <span class="part-badge purple">💼 PART 4｜關於業務工作</span>
+      <div class="q-number">Q12</div>
+      <div class="q-text">你覺得「業務」這個職位最讓你卻步的是？</div>
+      <div class="q-hint">👆 <span class="q-type-badge">可複選，沒有也可選擇</span></div>
+      <div class="options" id="opts-q12">
+        <div class="option" onclick="selectMultiAny('q12','收入不確定',this)"><span class="opt-letter">A</span>收入不確定<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectMultiAny('q12','業績壓力太大',this)"><span class="opt-letter">B</span>業績壓力太大<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectMultiAny('q12','感覺像在強迫別人',this)"><span class="opt-letter">C</span>感覺像在強迫別人<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectMultiAny('q12','不知道業業需要到底是什麼',this)"><span class="opt-letter">D</span>不知道業業需要到底是什麼<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectMultiAny('q12','我沒有特別卻步',this)"><span class="opt-letter">E</span>我沒有特別卻步<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectMultiAny('q12','其他',this)"><span class="opt-letter">F</span>其他<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q12" class="error-msg">請至少選擇一個選項</div>
+      <button class="next-btn blue-btn" onclick="nextQ('q12',18)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 18: Q13 ════════════════ -->
+  <div class="screen" id="screen-18">
+    <button class="back-btn" onclick="goTo(17)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">關於業務工作</span>
+      <span class="progress-count">13 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:81%"></div></div>
+    <div class="content">
+      <span class="part-badge purple">💼 PART 4｜關於業務工作</span>
+      <div class="q-number">Q13</div>
+      <div class="q-text">如果有機會，你願意花 30 分鐘深入了解業務工作的哪些內容？</div>
+      <div class="q-hint">🏷️ <span class="q-type-badge">單選</span></div>
+      <div class="options" id="opts-q13">
+        <div class="option" onclick="selectSingle('q13','A',this)"><span class="opt-letter">A</span>業務的真實工作內容與收入結構<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q13','B',this)"><span class="opt-letter">B</span>富邦金控的優勢是什麼<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q13','C',this)"><span class="opt-letter">C</span>晉升與主管培育的機會<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q13','D',this)"><span class="opt-letter">D</span>我對業務工作還沒興趣，先看看報告再說<span class="check-icon">✓</span></div>
+        <div class="option" onclick="selectSingle('q13','E',this)"><span class="opt-letter">E</span>都有興趣，看過報告後我會更清楚<span class="check-icon">✓</span></div>
+      </div>
+      <div id="err-q13" class="error-msg">請選擇一個選項</div>
+      <button class="next-btn blue-btn" onclick="nextQ('q13',19)">下一題 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 19: PART 5 Intro ════════════════ -->
+  <div class="screen" id="screen-19">
+    <button class="back-btn" onclick="goTo(18)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">用你自己的話說</span>
+      <span class="progress-count">14 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:87%"></div></div>
+    <div class="content" style="justify-content:center; gap:20px;">
+      <div class="part-intro-hero" style="background: linear-gradient(135deg,#00B5A3,#1A73C8);">
+        <div class="emoji">✍️</div>
+        <h2>PART 5｜用你自己的話說</h2>
+        <div class="sub">開放填寫</div>
+      </div>
+      <button class="next-btn teal-btn" onclick="goTo(20)">開始作答 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 20: Q14 ════════════════ -->
+  <div class="screen" id="screen-20">
+    <button class="back-btn" onclick="goTo(19)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">用你自己的話說</span>
+      <span class="progress-count">14 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:87%"></div></div>
+    <div class="content">
+      <span class="part-badge green">✍️ PART 5｜用你自己的話說</span>
+      <div class="q-number">Q14</div>
+      <div class="q-text">你有過哪些特別的經歷或能力？或是你發現自己哪裡和別人不一樣？</div>
+      <div class="q-hint">💡 可以是課業、打工、社團、人際關係、或個性、習慣、思維方式等</div>
+      <textarea id="ans-q14" placeholder="隨便寫，越真實越好～"></textarea>
+      <button class="next-btn teal-btn" onclick="nextFree('q14',21)">略過，繼續 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 21: Q15 ════════════════ -->
+  <div class="screen" id="screen-21">
+    <button class="back-btn" onclick="goTo(20)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">用你自己的話說</span>
+      <span class="progress-count">15 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:93%"></div></div>
+    <div class="content">
+      <span class="part-badge green">✍️ PART 5｜用你自己的話說</span>
+      <div class="q-number">Q15</div>
+      <div class="q-text">畢業後三到五年，你希望自己的生活或工作狀態是什麼樣子？</div>
+      <div class="q-hint">💡 可以描述生活方式、工作感受、收入目標都行</div>
+      <textarea id="ans-q15" placeholder="隨便寫，不用很正式"></textarea>
+      <button class="next-btn teal-btn" onclick="nextFree('q15',22)">略過，繼續 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 22: Q16 ════════════════ -->
+  <div class="screen" id="screen-22">
+    <button class="back-btn" onclick="goTo(21)">← 上一頁</button>
+    <div class="progress-area">
+      <span class="progress-label">用你自己的話說</span>
+      <span class="progress-count">16 / 16</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:100%"></div></div>
+    <div class="content">
+      <span class="part-badge green">✍️ PART 5｜用你自己的話說</span>
+      <div class="q-number">Q16</div>
+      <div class="q-text">對於業務或保險相關的工作，你心裡最大的問題或擔心是什麼？</div>
+      <div class="q-hint">💡 沒有問題也可以寫「還沒想過」或「不太了解」</div>
+      <textarea id="ans-q16" placeholder="你的擔心是我們最想知道的事"></textarea>
+      <button class="next-btn teal-btn" onclick="submitForm()">略過，繼續 →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ SCREEN 23: 成功 ════════════════ -->
+  <div class="screen" id="screen-23">
+    <div class="success-screen">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">感謝你的填寫！</div>
+      <div class="success-desc">
+        你的回答已經成功送出。<br>
+        我們的團隊會根據你的答案，<br>
+        為你準備一份專屬的職涯分析報告。<br><br>
+        <strong>期待很快和你分享結果！</strong>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .card -->
+
+<script>
+// ══════════ State ══════════
+const answers = {
+  school:'', dept:'', grade:'', mbti:'',
+  q1:'', q2:'', q3:'', q4:[],
+  q5:[], q6:'', q7:'', q8:'', q9:'', q10:'',
+  q11:'', q12:[], q13:'',
+  q14:'', q15:'', q16:''
+};
+
+// ══════════ Navigation ══════════
+function goTo(screenNum) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + screenNum).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ══════════ Basic info submit ══════════
+function submitBasic() {
+  const school = document.getElementById('f_school').value.trim();
+  const dept   = document.getElementById('f_dept').value.trim();
+  const grade  = document.getElementById('f_grade').value.trim();
+  const err    = document.getElementById('basic-error');
+  if (!school || !dept || !grade) {
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  answers.school = school;
+  answers.dept   = dept;
+  answers.grade  = grade;
+  answers.mbti   = document.getElementById('f_mbti').value.trim();
+  goTo(2);
+}
+
+// ══════════ Single select ══════════
+function selectSingle(qKey, val, el) {
+  answers[qKey] = val;
+  const opts = el.closest('.options');
+  opts.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const err = document.getElementById('err-' + qKey);
+  if (err) err.style.display = 'none';
+}
+
+// ══════════ Multi select with max ══════════
+function selectMulti(qKey, val, el, maxCount) {
+  const arr = answers[qKey];
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    const idx = arr.indexOf(val);
+    if (idx > -1) arr.splice(idx, 1);
+  } else {
+    if (arr.length >= maxCount) return;
+    el.classList.add('selected');
+    arr.push(val);
+  }
+  const lim = document.getElementById('limit-' + qKey);
+  if (lim) lim.textContent = '已選 ' + arr.length + ' / ' + maxCount;
+  const err = document.getElementById('err-' + qKey);
+  if (err) err.style.display = 'none';
+}
+
+// ══════════ Multi select without max (any) ══════════
+function selectMultiAny(qKey, val, el) {
+  const arr = answers[qKey];
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    const idx = arr.indexOf(val);
+    if (idx > -1) arr.splice(idx, 1);
+  } else {
+    el.classList.add('selected');
+    arr.push(val);
+  }
+  const err = document.getElementById('err-' + qKey);
+  if (err) err.style.display = 'none';
+}
+
+// ══════════ Rank select (Q4) ══════════
+const rankColors = ['r1','r2','r3'];
+const rankLabels = ['1','2','3'];
+
+function selectRank(qKey, val, el) {
+  const arr = answers[qKey];
+  // If already selected → deselect
+  if (el.classList.contains('selected')) {
+    const pos = arr.indexOf(val);
+    if (pos === -1) return;
+    arr.splice(pos, 1);
+    el.classList.remove('selected');
+    // Re-render all ranks
+    rerenderRanks(qKey);
+    return;
+  }
+  if (arr.length >= 3) return;
+  arr.push(val);
+  el.classList.add('selected');
+  rerenderRanks(qKey);
+}
+
+function rerenderRanks(qKey) {
+  const arr = answers[qKey];
+  const opts = document.getElementById('opts-' + qKey);
+  const allOpts = opts.querySelectorAll('.option');
+  // reset all
+  allOpts.forEach((o, i) => {
+    const rb = document.getElementById('rank-' + qKey + '-' + i);
+    if (rb) { rb.style.display = 'none'; rb.className = 'rank-badge'; rb.textContent = ''; }
+    o.classList.remove('selected');
+  });
+  // re-apply
+  allOpts.forEach((o, i) => {
+    const optText = o.querySelector('span:not(.opt-letter):not(.rank-badge)')
+      ? o.childNodes[1]?.textContent?.trim() || ''
+      : '';
+    // get text content excluding spans
+    const txt = Array.from(o.childNodes)
+      .filter(n => n.nodeType === 3)
+      .map(n => n.textContent.trim())
+      .join('') || o.textContent.replace(/[—✓\d]/g,'').trim();
+
+    const rankIdx = arr.indexOf(o.querySelector('span.opt-letter') ? 
+      getOptionValue(o) : '');
+    // simpler: match by innerHTML text
+  });
+
+  // Simpler approach: iterate arr
+  const optEls = Array.from(opts.querySelectorAll('.option'));
+  arr.forEach((val, rankIdx) => {
+    // find the option element that has this value
+    optEls.forEach((o, i) => {
+      const oVal = getOptionValue(o);
+      if (oVal === val) {
+        o.classList.add('selected');
+        const rb = document.getElementById('rank-' + qKey + '-' + i);
+        if (rb) {
+          rb.style.display = 'flex';
+          rb.className = 'rank-badge ' + rankColors[rankIdx];
+          rb.textContent = rankLabels[rankIdx];
+        }
+      }
+    });
+  });
+
+  const doneLabel = document.getElementById('rank-done-' + qKey);
+  if (doneLabel) doneLabel.style.display = arr.length === 3 ? 'block' : 'none';
+  const err = document.getElementById('err-' + qKey);
+  if (err) err.style.display = 'none';
+}
+
+function getOptionValue(el) {
+  // Extract text content excluding letter span and rank badge
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll('.opt-letter,.rank-badge,.check-icon').forEach(e => e.remove());
+  return clone.textContent.trim();
+}
+
+// ══════════ Next for single/multi ══════════
+function nextQ(qKey, nextScreen) {
+  const val = answers[qKey];
+  const isEmpty = Array.isArray(val) ? val.length === 0 : val === '';
+  if (isEmpty) {
+    const err = document.getElementById('err-' + qKey);
+    if (err) err.style.display = 'block';
+    return;
+  }
+  goTo(nextScreen);
+}
+
+function nextRank(qKey, nextScreen) {
+  if (answers[qKey].length < 3) {
+    const err = document.getElementById('err-' + qKey);
+    if (err) err.style.display = 'block';
+    return;
+  }
+  goTo(nextScreen);
+}
+
+function nextFree(qKey, nextScreen) {
+  answers[qKey] = document.getElementById('ans-' + qKey).value.trim();
+  goTo(nextScreen);
+}
+
+// ══════════ Submit ══════════
+async function submitForm() {
+  answers.q16 = document.getElementById('ans-q16').value.trim();
+
+  document.getElementById('loadingOverlay').classList.add('show');
+
+  // ⚠️ 請將下面的 URL 換成你的 Apps Script 部署網址
+  const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    school:  answers.school,
+    dept:    answers.dept,
+    grade:   answers.grade,
+    mbti:    answers.mbti,
+    q1:      answers.q1,
+    q2:      answers.q2,
+    q3:      answers.q3,
+    q4_rank1: answers.q4[0] || '',
+    q4_rank2: answers.q4[1] || '',
+    q4_rank3: answers.q4[2] || '',
+    q5:      answers.q5.join('、'),
+    q6:      answers.q6,
+    q7:      answers.q7,
+    q8:      answers.q8,
+    q9:      answers.q9,
+    q10:     answers.q10,
+    q11:     answers.q11,
+    q12:     answers.q12.join('、'),
+    q13:     answers.q13,
+    q14:     answers.q14,
+    q15:     answers.q15,
+    q16:     answers.q16,
+  };
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch(e) {
+    console.error('Submit error:', e);
+  }
+
+  document.getElementById('loadingOverlay').classList.remove('show');
+  goTo(23);
+}
+</script>
+</body>
+</html>
