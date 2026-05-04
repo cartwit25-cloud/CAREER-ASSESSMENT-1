@@ -6,7 +6,7 @@
 <title>職涯探索計畫 | 富邦中辰</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: 'Noto Sans TC', sans-serif;
     background: #ddeef6;
@@ -15,12 +15,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 0 50px 0;
+    padding: 0 0 60px 0;
     -webkit-text-size-adjust: 100%;
   }
 
   /* ===== PAGE SYSTEM ===== */
-  .page { display: none; width: 100%; max-width: 500px; padding: 0 16px; }
+  .page { display: none; width: 100%; max-width: 500px; padding: 0 14px; }
   .page.active { display: block; }
 
   /* ===== LANDING PAGE ===== */
@@ -124,7 +124,7 @@
     margin: 0 16px;
     background: linear-gradient(90deg, #1a6fa8, #1a9e7a);
     color: white;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     padding: 18px;
     border-radius: 14px;
@@ -133,6 +133,8 @@
     text-align: center;
     letter-spacing: 0.5px;
     font-family: 'Noto Sans TC', sans-serif;
+    -webkit-appearance: none;
+    touch-action: manipulation;
   }
 
   .btn-start:hover { opacity: 0.93; }
@@ -148,14 +150,17 @@
     background: white;
     border: 1.5px solid #ddd;
     border-radius: 10px;
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: 10px 18px;
+    font-size: 14px;
     color: #444;
     cursor: pointer;
     font-family: 'Noto Sans TC', sans-serif;
     display: flex;
     align-items: center;
     gap: 4px;
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    min-height: 44px;
   }
 
   .btn-back:hover { background: #f5f5f5; }
@@ -212,13 +217,14 @@
     width: 100%;
     border: 1.5px solid #e0e0e0;
     border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 14px;
+    padding: 13px 14px;
+    font-size: 16px;
     color: #333;
     font-family: 'Noto Sans TC', sans-serif;
     outline: none;
     background: #fff;
     transition: border-color 0.2s;
+    -webkit-appearance: none;
   }
 
   .form-input:focus { border-color: #1a9e7a; }
@@ -228,15 +234,18 @@
     width: 100%;
     background: #b0cfe0;
     color: white;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
-    padding: 15px;
+    padding: 16px;
     border-radius: 12px;
     border: none;
     cursor: pointer;
     margin-top: 8px;
     font-family: 'Noto Sans TC', sans-serif;
     transition: background 0.2s;
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    min-height: 54px;
   }
 
   .btn-proceed.ready {
@@ -310,13 +319,16 @@
     width: 100%;
     background: linear-gradient(90deg, #1a6fa8, #1a9e7a);
     color: white;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
-    padding: 16px;
+    padding: 17px;
     border-radius: 14px;
     border: none;
     cursor: pointer;
     font-family: 'Noto Sans TC', sans-serif;
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    min-height: 54px;
   }
 
   /* ===== QUESTION PAGES ===== */
@@ -374,18 +386,20 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 14px 16px;
+    padding: 15px 16px;
     border: 1.5px solid #e0e0e0;
     border-radius: 12px;
     background: white;
     cursor: pointer;
     text-align: left;
     font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     color: #222;
     transition: all 0.18s;
     width: 100%;
     line-height: 1.55;
+    -webkit-appearance: none;
+    touch-action: manipulation;
   }
 
   .option-btn .opt-label {
@@ -489,9 +503,9 @@
     width: 100%;
     background: linear-gradient(90deg, #1a6fa8, #1a9e7a);
     color: white;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
-    padding: 16px;
+    padding: 17px;
     border-radius: 14px;
     border: none;
     cursor: pointer;
@@ -499,11 +513,14 @@
     opacity: 0.5;
     pointer-events: none;
     transition: opacity 0.2s;
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    min-height: 54px;
   }
 
   .btn-next.active {
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
   }
 
   /* ===== FINAL PAGE ===== */
@@ -655,7 +672,7 @@
     width: 100%;
     background: linear-gradient(90deg, #1a9e7a, #17b87a);
     color: white;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     padding: 18px;
     border-radius: 14px;
@@ -670,9 +687,12 @@
     opacity: 0.5;
     pointer-events: none;
     transition: opacity 0.2s;
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    min-height: 54px;
   }
 
-  .btn-submit.active { opacity: 1; pointer-events: all; }
+  .btn-submit.active { opacity: 1; pointer-events: auto; }
 
   /* ===== SUCCESS PAGE ===== */
   .success-card {
@@ -1454,8 +1474,7 @@ function toggleCheckboxStyle(input, id) {
 }
 
 // ===== SUBMIT =====
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbziTMMocM9zjsbnqUXCvcAzufxZpZajy3yAvuGo7DxyQqLNj15ans0JwPIW0_XnT71-/exec
-'; // 替換為你的 GAS 部署網址
+const GAS_URL = 'YOUR_GAS_WEB_APP_URL'; // 替換為你的 GAS 部署網址
 
 async function submitForm() {
   // Collect all data
