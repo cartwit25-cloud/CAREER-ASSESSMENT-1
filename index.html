@@ -195,7 +195,7 @@
     line-height: 1.6;
   }
 
-  .form-group { margin-bottom: 16px; }
+  .form-group { margin-bottom: 18px; }
 
   .form-label {
     font-size: 13px;
@@ -322,7 +322,7 @@
   .question-card {
     background: white;
     border-radius: 18px;
-    padding: 24px 20px;
+    padding: 26px 20px 22px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     margin-bottom: 14px;
   }
@@ -342,35 +342,38 @@
 
   .question-number {
     font-size: 11px;
-    color: #aaa;
-    margin-bottom: 6px;
+    color: #888;
+    margin-bottom: 7px;
     font-weight: 500;
+    text-align: center;
   }
 
   .question-text {
     font-size: 17px;
     font-weight: 900;
     color: #111;
-    line-height: 1.5;
-    margin-bottom: 6px;
+    line-height: 1.6;
+    margin-bottom: 7px;
+    text-align: center;
   }
 
   .question-type-hint {
-    font-size: 11.5px;
-    color: #aaa;
-    margin-bottom: 16px;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 18px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
   }
 
-  .options-list { display: flex; flex-direction: column; gap: 10px; }
+  .options-list { display: flex; flex-direction: column; gap: 11px; }
 
   .option-btn {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 13px 16px;
+    padding: 14px 16px;
     border: 1.5px solid #e0e0e0;
     border-radius: 12px;
     background: white;
@@ -381,6 +384,7 @@
     color: #222;
     transition: all 0.18s;
     width: 100%;
+    line-height: 1.55;
   }
 
   .option-btn .opt-label {
@@ -720,7 +724,7 @@
   <div class="landing-hero">
     <div class="landing-badge">富邦中辰 × 職涯探索計畫</div>
     <div class="landing-title">你知道自己在職場上最值錢的特質是什麼嗎？</div>
-    <div class="landing-desc">這份測驗結合性格分析與工作價值觀，並導入真實職場經驗的AI分析，幫你找出職場優勢、盲點，以及你可能從沒考慮過的職涯方向。</div>
+    <div class="landing-desc">這份測驗結合性格分析與工作價值觀，並導入真實職場經驗的AI分析，<br>幫你找出職場優勢、盲點，以及你可能從沒考慮過的職涯方向。</div>
     <hr class="landing-divider">
     <div class="landing-stats">
       <div class="stat-item"><span class="stat-number">5分鐘</span><span class="stat-label">作答時間</span></div>
@@ -730,7 +734,7 @@
   </div>
   <div style="padding:0 16px;">
     <div class="landing-card">
-      <p>不管你有沒有想過金融業或業務相關工作，這份測驗都值得你花 5 分鐘填完。</p>
+      <p>不管你有沒有想過金融業或業務相關工作，<br>這份測驗都值得你花 5 分鐘填完。</p>
       <p class="highlight">填完後你會拿到一份專屬的職涯分析報告。</p>
     </div>
     <button class="btn-start" onclick="goTo('page-basic')">開始測驗 →</button>
@@ -802,7 +806,7 @@
   <div class="question-card">
     <div class="question-part-tag">💎 PART 1｜你重視什麼？</div>
     <div class="question-number">Q2</div>
-    <div class="question-text">你對「收入不固定、靠自己表現決定薪水」這件事<br>，直覺反應是？</div>
+    <div class="question-text">你對「收入不固定、靠自己表現決定薪水」這件事，<br>直覺反應是？</div>
     <div class="question-type-hint">💡 單選</div>
     <div class="options-list" id="opts-q2">
       <button class="option-btn" onclick="selectSingle('q2','A',this)"><span class="opt-label">A</span><span class="opt-text">很抗拒，我需要穩定與安全感</span></button>
@@ -876,7 +880,7 @@
     <div class="question-part-tag">🔍 PART 2｜你是什麼樣的人？</div>
     <div class="question-number">Q5</div>
     <div class="question-text">朋友通常怎麼形容你？</div>
-    <div class="question-type-hint">☑️ 最多選 2 個</div>
+    <div class="question-type-hint">💡 最多選 2 個</div>
     <div class="options-list" id="opts-q5">
       <button class="option-btn" onclick="selectMulti('q5',this,2)"><span class="opt-checkbox"></span><span class="opt-text">很愛聊天，跟誰都能熟絡</span></button>
       <button class="option-btn" onclick="selectMulti('q5',this,2)"><span class="opt-checkbox"></span><span class="opt-text">做事很可靠，交代的事一定完成</span></button>
@@ -932,7 +936,7 @@
   <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q8')">← 上一頁</button></div>
   <div id="pb-q8"></div>
   <div class="question-card">
-    <div class="question-part-tag">🔍 PART 2｜你是什麼樣的人？</div>
+    <div class="question-part-tag">🎯 PART 3｜你怎麼看工作？</div>
     <div class="question-number">Q8</div>
     <div class="question-text">你剛入職一個月，壓力比預期大很多。你會？</div>
     <div class="question-type-hint">💡 單選</div>
@@ -965,7 +969,7 @@
   <div class="question-card">
     <div class="question-part-tag">🎯 PART 3｜你怎麼看工作？</div>
     <div class="question-number">Q9</div>
-    <div class="question-text">你花了兩週準備一份提案，最後遭到駁回。你最真實的反應是？</div>
+    <div class="question-text">你花了兩週準備一份提案，最後遭到駁回。<br>你最真實的反應是？</div>
     <div class="question-type-hint">💡 單選</div>
     <div class="options-list" id="opts-q9">
       <button class="option-btn" onclick="selectSingle('q9','A',this)"><span class="opt-label">A</span><span class="opt-text">很失落，但想知道原因</span></button>
@@ -1023,7 +1027,10 @@
       <button class="option-btn" onclick="selectSingle('q11','C',this)"><span class="opt-label">C</span><span class="opt-text">感覺很會說話才能做</span></button>
       <button class="option-btn" onclick="selectSingle('q11','D',this)"><span class="opt-label">D</span><span class="opt-text">我從來沒認真考慮過這個方向</span></button>
       <button class="option-btn" onclick="selectSingle('q11','E',this)"><span class="opt-label">E</span><span class="opt-text">我本來就有興趣或正在考慮</span></button>
-      <button class="option-btn" onclick="selectSingle('q11','F',this)"><span class="opt-label">F</span><span class="opt-text">其他</span></button>
+      <button class="option-btn" onclick="selectSingleWithOther('q11','F',this,'other-q11-wrap')"><span class="opt-label">F</span><span class="opt-text">其他</span></button>
+    </div>
+    <div id="other-q11-wrap" style="display:none;margin-top:8px;">
+      <input class="other-input" id="other-q11" type="text" placeholder="請具體說明...">
     </div>
   </div>
   <button class="btn-next" id="next-q11" onclick="goTo('page-q12')">下一題 →</button>
@@ -1037,7 +1044,7 @@
     <div class="question-part-tag">💼 PART 4｜關於業務工作</div>
     <div class="question-number">Q12</div>
     <div class="question-text">你覺得「業務」這個職位最讓你卻步的是？</div>
-    <div class="question-type-hint">☑️ 可複選，選有共鳴的選項</div>
+    <div class="question-type-hint">💡 可多選，沒有也沒關係</div>
     <div class="options-list" id="opts-q12">
       <button class="option-btn" onclick="selectMulti('q12',this,6)"><span class="opt-checkbox"></span><span class="opt-text">收入不確定</span></button>
       <button class="option-btn" onclick="selectMulti('q12',this,6)"><span class="opt-checkbox"></span><span class="opt-text">業績壓力太大</span></button>
@@ -1047,7 +1054,7 @@
       <button class="option-btn" onclick="selectMulti('q12',this,6)" data-other="true"><span class="opt-checkbox"></span><span class="opt-text">其他</span></button>
     </div>
     <div id="other-q12-wrap" style="display:none;margin-top:6px;">
-      <input class="other-input" id="other-q12" type="text" placeholder="請填寫你的答案">
+      <input class="other-input" id="other-q12" type="text" placeholder="請具體說明...">
     </div>
   </div>
   <button class="btn-next" id="next-q12" onclick="goTo('page-q13')">下一題 →</button>
@@ -1060,7 +1067,7 @@
   <div class="question-card">
     <div class="question-part-tag">💼 PART 4｜關於業務工作</div>
     <div class="question-number">Q13</div>
-    <div class="question-text">如果有機會，你願意花 30 分鐘深入了解業務工作的哪些內容？</div>
+    <div class="question-text">如果有機會，你願意花 30 分鐘深入了解業務工作<br>的哪些內容？</div>
     <div class="question-type-hint">💡 單選</div>
     <div class="options-list" id="opts-q13">
       <button class="option-btn" onclick="selectSingle('q13','A',this)"><span class="opt-label">A</span><span class="opt-text">業務的真實工作內容與收入結構</span></button>
@@ -1078,9 +1085,9 @@
   <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q14')">← 上一頁</button></div>
   <div id="pb-q14"></div>
   <div class="question-card">
-    <div class="question-part-tag">💼 PART 4｜關於業務工作</div>
+    <div class="question-part-tag">✏️ PART 5｜用你自己的話說</div>
     <div class="question-number">Q14</div>
-    <div class="question-text">你有過哪些特別的經歷或能力？或是你發現自己哪裡和別人不一樣？</div>
+    <div class="question-text">你有過哪些特別的經歷或能力？<br>或是你發現自己哪裡和別人不一樣？</div>
     <div class="question-type-hint">💡 可以是課業、打工、社團、人際關係、或個性、習慣、思維方式等</div>
     <div style="margin-top:8px;">
       <textarea class="form-input" id="ans-q14" rows="4" placeholder="隨便寫，越真實越好～" style="resize:none;line-height:1.7;" oninput="checkTextarea('q14','next-q14')"></textarea>
@@ -1108,7 +1115,7 @@
   <div class="question-card">
     <div class="question-part-tag">✏️ PART 5｜用你自己的話說</div>
     <div class="question-number">Q15</div>
-    <div class="question-text">畢業後三到五年，你希望自己的生活或工作狀態是什麼樣子？</div>
+    <div class="question-text">畢業後三到五年，你希望自己的生活或工作狀態<br>是什麼樣子？</div>
     <div class="question-type-hint">💡 可以描述生活方式、工作感受、收入目標都行</div>
     <div style="margin-top:8px;">
       <textarea class="form-input" id="ans-q15" rows="4" placeholder="隨便寫，不用很正式" style="resize:none;line-height:1.7;" oninput="checkTextarea('q15','next-q15')"></textarea>
@@ -1124,7 +1131,7 @@
   <div class="question-card">
     <div class="question-part-tag">✏️ PART 5｜用你自己的話說</div>
     <div class="question-number">Q16</div>
-    <div class="question-text">對於業務或保險相關的工作，你心裡最大的擔憂或擔心是什麼？</div>
+    <div class="question-text">對於業務或保險相關的工作，<br>你心裡最大的擔憂或擔心是什麼？</div>
     <div class="question-type-hint">💡 沒有問題也可以寫「還沒想過」或「不太了解」</div>
     <div style="margin-top:8px;">
       <textarea class="form-input" id="ans-q16" rows="4" placeholder="你的擔心是我們最想知道的事" style="resize:none;line-height:1.7;" oninput="checkTextarea('q16','next-q16')"></textarea>
@@ -1141,7 +1148,7 @@
   <div class="basic-info-card" style="margin-bottom:14px;">
     <div class="section-tag" style="background:#e8f5e9;color:#2e7d32;">🎁 留下你的資料</div>
     <div class="basic-info-title" style="margin-bottom:6px;">讓我們把報告送給你</div>
-    <div class="basic-info-desc">完成測驗後，你將透過 Email 收到專屬的簡版職涯報告。不會有任何強迫推銷，請放心填寫。</div>
+    <div class="basic-info-desc">完成測驗後，你將透過 Email 收到專屬的簡版職涯報告。<br>不會有任何強迫推銷，請放心填寫。</div>
     <div class="final-alert">請務必正確填寫，以確保能取得完整版報告以及證照補助金的通知。</div>
 
     <div class="form-group">
@@ -1163,10 +1170,10 @@
 
     <div class="form-group">
       <label class="form-label">希望額外了解（選填，可多選）</label>
-      <label class="checkbox-option" id="extra-1"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-1')"> 金融證照安排</label>
-      <label class="checkbox-option" id="extra-2"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-2')"> 工作座談會</label>
-      <label class="checkbox-option" id="extra-3"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-3')"> 工作體驗／實習</label>
-      <label class="checkbox-option" id="extra-4"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-4')"> 正職／兼職工作說明</label>
+      <label class="checkbox-option" id="extra-1"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-1')"> <strong>金融證照安排</strong></label>
+      <label class="checkbox-option" id="extra-2"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-2')"> <strong>工作座談會</strong></label>
+      <label class="checkbox-option" id="extra-3"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-3')"> <strong>工作體驗／實習</strong></label>
+      <label class="checkbox-option" id="extra-4"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-4')"> <strong>正職／兼職工作說明</strong></label>
     </div>
   </div>
 
@@ -1213,7 +1220,7 @@
     <div class="success-icon">🎉</div>
     <div class="success-title">感謝你的填寫！</div>
     <div class="success-desc">
-      你的職涯報告正在生成中。<br>
+      你的職涯報告正在分析中。<br>
       我們會盡快將專屬報告寄送到你的 Email。<br><br>
       <strong>記得檢查信箱（含垃圾郵件）喔！</strong>
     </div>
@@ -1303,6 +1310,18 @@ function selectSingle(qid, val, btn) {
   btn.querySelector('.opt-label').innerHTML = '✓';
   const nextBtn = document.getElementById('next-' + qid);
   if (nextBtn) { nextBtn.classList.add('active'); }
+  // hide Q11 other field if a non-F option chosen
+  if (qid === 'q11' && val !== 'F') {
+    const wrap = document.getElementById('other-q11-wrap');
+    if (wrap) wrap.style.display = 'none';
+  }
+}
+
+// ===== SINGLE SELECT WITH OTHER FIELD =====
+function selectSingleWithOther(qid, val, btn, wrapperId) {
+  selectSingle(qid, val, btn);
+  const wrap = document.getElementById(wrapperId);
+  if (wrap) wrap.style.display = 'block';
 }
 
 // ===== RANK SELECT (up to 3) =====
@@ -1434,7 +1453,8 @@ function toggleCheckboxStyle(input, id) {
 }
 
 // ===== SUBMIT =====
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbziTMMocM9zjsbnqUXCvcAzufxZpZajy3yAvuGo7DxyQqLNj15ans0JwPIW0_XnT71-/exec'; // 替換為你的 GAS 部署網址
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbziTMMocM9zjsbnqUXCvcAzufxZpZajy3yAvuGo7DxyQqLNj15ans0JwPIW0_XnT71-/exec
+'; // 替換為你的 GAS 部署網址
 
 async function submitForm() {
   // Collect all data
@@ -1443,6 +1463,11 @@ async function submitForm() {
   if (document.getElementById('extra-2').querySelector('input').checked) extraLearn.push('工作座談會');
   if (document.getElementById('extra-3').querySelector('input').checked) extraLearn.push('工作體驗／實習');
   if (document.getElementById('extra-4').querySelector('input').checked) extraLearn.push('正職／兼職工作說明');
+
+  // Q11 other
+  let q11ans = answers['q11'] || '';
+  const otherQ11 = document.getElementById('other-q11') ? document.getElementById('other-q11').value.trim() : '';
+  if (q11ans === 'F' && otherQ11) q11ans = `其他：${otherQ11}`;
 
   // Q12 other
   let q12ans = answers['q12'] ? [...answers['q12']] : [];
@@ -1474,7 +1499,7 @@ async function submitForm() {
     q8: answers['q8'] || '',
     q9: answers['q9'] || '',
     q10: answers['q10'] || '',
-    q11: answers['q11'] || '',
+    q11: q11ans,
     q12: q12ans.join('、'),
     q13: answers['q13'] || '',
     q14: document.getElementById('ans-q14').value.trim(),
