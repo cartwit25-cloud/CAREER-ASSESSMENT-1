@@ -2,905 +2,1505 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>富邦中辰 × 職涯探索計畫</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>職涯探索計畫 | 富邦中辰</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: #ddeef6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 0 40px 0;
+  }
 
-:root {
-  --teal:        #12B886;
-  --teal-dark:   #0CA678;
-  --teal-bg:     #E6F9F3;
-  --blue:        #228BE6;
-  --blue-dark:   #1971C2;
-  --bg:          #EFF3F8;
-  --text:        #1A1A2E;
-  --text-mid:    #495057;
-  --text-light:  #868E96;
-  --border:      #DEE2E6;
-  --opt-sel-bg:  #E6F9F3;
-  --red: #FA5252;
-}
+  /* ===== PAGE SYSTEM ===== */
+  .page { display: none; width: 100%; max-width: 480px; padding: 0 16px; }
+  .page.active { display: block; }
 
-body {
-  font-family: 'Noto Sans TC', sans-serif;
-  background: var(--bg);
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 24px 16px 40px;
-}
+  /* ===== LANDING PAGE ===== */
+  #page-landing {
+    padding: 0;
+    max-width: 480px;
+    width: 100%;
+  }
 
-.card {
-  background: #fff;
-  border-radius: 18px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-  overflow: hidden;
-  min-height: 580px;
-  display: flex;
-  flex-direction: column;
-}
+  .landing-hero {
+    background: linear-gradient(160deg, #1a6fa8 0%, #1a9e7a 55%, #17a86a 100%);
+    border-radius: 0 0 28px 28px;
+    padding: 36px 28px 36px 28px;
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
+  }
 
-.screen { display: none; flex-direction: column; flex: 1; animation: fadeSlide .25s ease; }
-.screen.active { display: flex; }
-@keyframes fadeSlide {
-  from { opacity:0; transform:translateX(14px); }
-  to   { opacity:1; transform:translateX(0); }
-}
+  .landing-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.22);
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 22px;
+    letter-spacing: 0.5px;
+  }
 
-/* ── Top header ── */
-.hdr {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 18px 8px;
-}
-.hdr-label { font-size: 12px; color: var(--text-light); font-weight: 500; }
-.hdr-count { font-size: 12px; color: var(--blue); font-weight: 700; }
+  .landing-title {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin-bottom: 18px;
+    color: white;
+  }
 
-/* ── Progress bar ── */
-.prog-wrap { height: 5px; background: #E9ECEF; margin: 0 18px; border-radius: 99px; overflow: hidden; }
-.prog-fill  { height: 100%; border-radius: 99px; background: linear-gradient(90deg,#12B886,#228BE6); transition: width .4s ease; }
+  .landing-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.92);
+    margin-bottom: 28px;
+  }
 
-/* ── Back / home button ── */
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin: 12px 18px 0;
-  padding: 6px 14px;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-mid);
-  cursor: pointer;
-  background: #fff;
-  font-family: inherit;
-  transition: background .15s;
-  width: fit-content;
-}
-.back-btn:hover { background: #F8F9FA; }
+  .landing-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    margin: 0 0 24px 0;
+  }
 
-/* ── Body ── */
-.body { padding: 14px 18px 22px; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+  .landing-stats {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+  }
 
-/* ── Part pill ── */
-.part-pill {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 4px 10px; border-radius: 20px;
-  font-size: 11.5px; font-weight: 700; width: fit-content;
-}
-.pill-teal   { background: #E6F9F3; color: #0CA678; }
-.pill-blue   { background: #DBF0FF; color: #1864AB; }
-.pill-red    { background: #FFE8E8; color: #C92A2A; }
-.pill-purple { background: #EDE9FE; color: #5F3DC4; }
-.pill-green  { background: #EBFBEE; color: #2B8A3E; }
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
 
-/* ── Question text ── */
-.q-num  { font-size: 11px; color: var(--text-light); font-weight: 600; letter-spacing:.5px; }
-.q-text { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.55; }
-.q-hint { font-size: 11.5px; color: var(--text-light); display: flex; align-items: center; gap: 5px; }
-.q-type { background: #F1F3F5; color: var(--text-light); border-radius: 5px; padding: 1px 7px; font-size: 11px; font-weight: 600; }
+  .stat-number {
+    font-size: 22px;
+    font-weight: 900;
+    color: white;
+  }
 
-/* ── Options ── */
-.opts { display: flex; flex-direction: column; gap: 8px; }
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+  }
 
-.opt {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 14px;
-  border: 1.5px solid var(--border);
-  border-radius: 11px;
-  cursor: pointer;
-  font-size: 13.5px; font-weight: 500; color: var(--text);
-  background: #fff;
-  transition: border-color .15s, background .15s;
-  user-select: none;
-}
-.opt:hover { border-color: #ADB5BD; }
-.opt.sel { border-color: var(--teal); background: var(--opt-sel-bg); color: var(--teal-dark); }
+  .landing-card {
+    background: white;
+    border-radius: 18px;
+    margin: 16px 16px 14px 16px;
+    padding: 24px 22px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
 
-.opt-ltr {
-  width: 24px; height: 24px; border-radius: 50%;
-  background: #F1F3F5;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; color: var(--text-light);
-  flex-shrink: 0; transition: background .15s, color .15s;
-}
-.opt.sel .opt-ltr { background: var(--teal); color: #fff; }
+  .landing-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
 
-.opt-chk {
-  width: 22px; height: 22px; border-radius: 50%;
-  background: var(--teal);
-  display: none; align-items: center; justify-content: center;
-  font-size: 12px; color: #fff;
-  margin-left: auto; flex-shrink: 0;
-}
-.opt.sel .opt-chk { display: flex; }
+  .landing-card .highlight {
+    color: #1565c0;
+    font-weight: 700;
+    font-size: 15px;
+  }
 
-/* Rank badge */
-.opt-rank {
-  width: 22px; height: 22px; border-radius: 50%;
-  display: none; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; color: #fff;
-  margin-left: auto; flex-shrink: 0;
-}
-.opt-rank.show { display: flex; }
-.rk1 { background: #12B886; }
-.rk2 { background: #228BE6; }
-.rk3 { background: #7950F2; }
+  .btn-start {
+    display: block;
+    width: calc(100% - 32px);
+    margin: 0 16px;
+    background: linear-gradient(90deg, #1a6fa8, #1a9e7a);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 18px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
 
-.rank-done { font-size: 12px; color: var(--red); font-weight: 700; text-align: right; }
-.limit-note { font-size: 11.5px; color: var(--text-light); text-align: right; }
+  .btn-start:hover { opacity: 0.93; }
 
-/* ── Error ── */
-.err { font-size: 12px; color: var(--red); display: none; }
+  /* ===== BASIC INFO PAGE ===== */
+  .top-back-bar {
+    padding: 16px 0 8px 0;
+    display: flex;
+    align-items: center;
+  }
 
-/* ── Button ── */
-.btn {
-  width: 100%; padding: 15px; border: none; border-radius: 12px;
-  font-size: 15px; font-weight: 700; font-family: inherit;
-  cursor: pointer; color: #fff;
-  transition: opacity .15s, transform .1s;
-  margin-top: auto;
-}
-.btn:hover  { opacity:.92; transform:translateY(-1px); }
-.btn:active { transform:translateY(0); }
-.btn-teal   { background: linear-gradient(135deg,#12B886,#0CA678); }
-.btn-blue   { background: linear-gradient(135deg,#228BE6,#1971C2); }
-.btn-red    { background: linear-gradient(135deg,#FA5252,#E03131); }
-.btn-green  { background: linear-gradient(135deg,#40C057,#2F9E44); }
+  .btn-back {
+    background: white;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #444;
+    cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 
-/* ── Cover ── */
-.cover-hero {
-  padding: 28px 20px 24px;
-  background: linear-gradient(150deg,#12B886 0%,#228BE6 100%);
-  color: #fff; display: flex; flex-direction: column; gap: 10px;
-  position: relative; overflow: hidden;
-}
-.cover-hero::before {
-  content:''; position:absolute; top:-50px; right:-50px;
-  width:180px; height:180px; border-radius:50%; background:rgba(255,255,255,.07);
-}
-.cover-tag {
-  display: inline-flex; align-items: center;
-  background: rgba(255,255,255,.2); border-radius: 20px;
-  padding: 4px 12px; font-size: 11.5px; font-weight: 700;
-  width: fit-content;
-}
-.cover-hero h1 { font-size: 22px; font-weight: 900; line-height: 1.45; }
-.cover-hero p  { font-size: 12.5px; opacity:.88; line-height:1.65; }
-.cover-stats {
-  display: flex; border: 1px solid rgba(255,255,255,.3);
-  border-radius: 10px; overflow: hidden; margin-top: 4px;
-}
-.cover-stat {
-  flex:1; text-align:center; padding:10px 0;
-  border-right: 1px solid rgba(255,255,255,.25);
-}
-.cover-stat:last-child { border-right:none; }
-.cs-val { font-size: 18px; font-weight: 900; }
-.cs-lbl { font-size: 11px; opacity:.82; }
+  .btn-back:hover { background: #f5f5f5; }
 
-.cover-body { padding: 16px 18px 20px; display:flex; flex-direction:column; gap:14px; flex:1; }
-.cover-desc { font-size: 13px; color: var(--text-mid); line-height: 1.75; }
-.cover-link { color: var(--blue); text-decoration: underline; cursor:pointer; }
+  .basic-info-card {
+    background: white;
+    border-radius: 18px;
+    padding: 28px 22px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
 
-/* ── Form inputs ── */
-.form-group { display:flex; flex-direction:column; gap:5px; }
-.form-lbl { font-size: 13px; font-weight: 700; color: var(--text); }
-.form-req { color: var(--red); }
-input[type="text"] {
-  border: 1.5px solid var(--border); border-radius: 10px;
-  padding: 11px 13px; font-size: 14px; font-family: inherit;
-  color: var(--text); background: #FAFAFA; width: 100%;
-  transition: border-color .15s;
-}
-input[type="text"]:focus { outline:none; border-color:var(--teal); }
-input[type="text"]::placeholder { color:#ADB5BD; }
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #e8f5e9;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 16px;
+  }
 
-/* ── Part intro card ── */
-.part-intro {
-  border-radius: 14px; padding: 40px 24px; text-align: center;
-  color: #fff; position: relative; overflow: hidden;
-}
-.part-intro::before {
-  content:''; position:absolute; top:-40px; right:-40px;
-  width:140px; height:140px; border-radius:50%; background:rgba(255,255,255,.1);
-}
-.part-intro::after {
-  content:''; position:absolute; bottom:-30px; left:-30px;
-  width:100px; height:100px; border-radius:50%; background:rgba(255,255,255,.07);
-}
-.pi-emoji { font-size:36px; display:block; margin-bottom:10px; }
-.pi-title { font-size:20px; font-weight:900; }
-.pi-sub   { font-size:13px; opacity:.85; margin-top:5px; }
-.pi-teal   { background: linear-gradient(135deg,#12B886,#0CA678); }
-.pi-blue   { background: linear-gradient(135deg,#228BE6,#1971C2); }
-.pi-red    { background: linear-gradient(135deg,#FA5252,#E03131); }
-.pi-green  { background: linear-gradient(135deg,#40C057,#2F9E44); }
+  .basic-info-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 6px;
+  }
 
-/* ── Textarea ── */
-textarea {
-  width:100%; border:1.5px solid var(--border); border-radius:11px;
-  padding:13px; font-size:13.5px; font-family:inherit; color:var(--text);
-  resize:none; min-height:120px; background:#FAFAFA;
-  transition:border-color .15s;
-}
-textarea:focus { outline:none; border-color:var(--teal); }
-textarea::placeholder { color:#ADB5BD; }
+  .basic-info-desc {
+    font-size: 12.5px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
 
-/* ── Success ── */
-.success {
-  flex:1; display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  padding:40px 24px; text-align:center; gap:16px;
-}
-.success-icon {
-  width:80px; height:80px; border-radius:50%;
-  background:linear-gradient(135deg,#12B886,#228BE6);
-  display:flex; align-items:center; justify-content:center;
-  font-size:38px; animation:pop .5s cubic-bezier(.175,.885,.32,1.275);
-}
-@keyframes pop { from{transform:scale(0)} to{transform:scale(1)} }
-.success-title { font-size:21px; font-weight:900; color:var(--text); }
-.success-desc  { font-size:14px; color:var(--text-mid); line-height:1.75; }
+  .form-group { margin-bottom: 16px; }
 
-/* ── Loading overlay ── */
-#overlay {
-  display:none; position:fixed; inset:0;
-  background:rgba(255,255,255,.82); z-index:999;
-  align-items:center; justify-content:center;
-  flex-direction:column; gap:12px;
-  font-size:14px; color:var(--teal-dark); font-weight:700;
-}
-#overlay.show { display:flex; }
-.spin { width:38px; height:38px; border:4px solid #E9ECEF; border-top-color:var(--teal); border-radius:50%; animation:spin .75s linear infinite; }
-@keyframes spin { to{transform:rotate(360deg)} }
+  .form-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .form-label .required { color: #e53935; margin-left: 2px; }
+
+  .form-input {
+    width: 100%;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #333;
+    font-family: 'Noto Sans TC', sans-serif;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: #1a9e7a; }
+  .form-input::placeholder { color: #bbb; }
+
+  .btn-proceed {
+    width: 100%;
+    background: #b0cfe0;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+    transition: background 0.2s;
+  }
+
+  .btn-proceed.ready {
+    background: linear-gradient(90deg, #1a6fa8, #1a9e7a);
+  }
+
+  .btn-proceed:hover.ready { opacity: 0.93; }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0 10px 0;
+  }
+
+  .progress-section-name {
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+  }
+
+  .progress-counter {
+    font-size: 13px;
+    color: #1a6fa8;
+    font-weight: 700;
+  }
+
+  .progress-bar-wrap {
+    width: 100%;
+    height: 5px;
+    background: #d0e6f0;
+    border-radius: 99px;
+    margin-bottom: 14px;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1a6fa8, #1a9e7a);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  /* ===== SECTION INTRO PAGES ===== */
+  .section-intro-card {
+    background: linear-gradient(145deg, #1a6fa8, #1a9e7a);
+    border-radius: 22px;
+    padding: 40px 28px 32px;
+    text-align: center;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  .section-intro-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+
+  .section-intro-title {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .section-intro-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .btn-begin {
+    width: 100%;
+    background: linear-gradient(90deg, #1a6fa8, #1a9e7a);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  /* ===== QUESTION PAGES ===== */
+  .question-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 14px;
+  }
+
+  .question-part-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a6fa8;
+    background: #e3f0fb;
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-bottom: 14px;
+  }
+
+  .question-number {
+    font-size: 11px;
+    color: #aaa;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .question-text {
+    font-size: 17px;
+    font-weight: 900;
+    color: #111;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+
+  .question-type-hint {
+    font-size: 11.5px;
+    color: #aaa;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .options-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    color: #222;
+    transition: all 0.18s;
+    width: 100%;
+  }
+
+  .option-btn .opt-label {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #aaa;
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+
+  .option-btn .opt-text { flex: 1; line-height: 1.4; }
+
+  .option-btn.selected {
+    border-color: #1a9e7a;
+    background: #e8f8f3;
+    color: #0d6e4e;
+  }
+
+  .option-btn.selected .opt-label {
+    background: #1a9e7a;
+    border-color: #1a9e7a;
+    color: white;
+  }
+
+  /* Rank options */
+  .option-btn.rank-selected {
+    border-color: #1a6fa8;
+    background: #e3f0fb;
+    color: #0d4e8a;
+  }
+
+  .rank-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #1a6fa8;
+    color: white;
+    font-size: 12px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Checkbox options */
+  .option-btn .opt-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1.5px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+
+  .option-btn.checked {
+    border-color: #1a9e7a;
+    background: #e8f8f3;
+    color: #0d6e4e;
+  }
+
+  .option-btn.checked .opt-checkbox {
+    background: #1a9e7a;
+    border-color: #1a9e7a;
+    color: white;
+  }
+
+  .rank-counter {
+    font-size: 12px;
+    color: #e53935;
+    font-weight: 700;
+    text-align: right;
+    margin-top: 8px;
+  }
+
+  /* Multi-select sub-text input */
+  .other-input {
+    width: 100%;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-top: 8px;
+    outline: none;
+  }
+
+  .other-input:focus { border-color: #1a9e7a; }
+
+  .btn-next {
+    width: 100%;
+    background: linear-gradient(90deg, #1a6fa8, #1a9e7a);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-next.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ===== FINAL PAGE ===== */
+  .final-section-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #222;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .final-section-desc {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.7;
+  }
+
+  .final-alert {
+    color: #e53935;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+
+  .checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    color: #222;
+    margin-bottom: 10px;
+    transition: all 0.18s;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  .checkbox-option input[type="checkbox"] {
+    width: 18px; height: 18px; accent-color: #1a9e7a; flex-shrink: 0;
+  }
+
+  .checkbox-option.checked {
+    border-color: #1a9e7a;
+    background: #e8f8f3;
+  }
+
+  .referrer-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+
+  .referrer-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff3e0;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #e65100;
+    margin-bottom: 14px;
+  }
+
+  .referrer-title {
+    font-size: 17px;
+    font-weight: 900;
+    text-align: center;
+    color: #222;
+    margin-bottom: 6px;
+  }
+
+  .referrer-desc {
+    font-size: 12.5px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .referrer-highlight {
+    background: #e3f0fb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #1a5e8a;
+    font-weight: 500;
+    line-height: 1.65;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .privacy-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 14px;
+  }
+
+  .privacy-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: #222;
+    margin-bottom: 14px;
+  }
+
+  .privacy-scroll {
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    height: 120px;
+    overflow-y: scroll;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    background: #fafafa;
+  }
+
+  .privacy-agree {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13.5px;
+    color: #333;
+    line-height: 1.7;
+    cursor: pointer;
+  }
+
+  .privacy-agree input[type="checkbox"] {
+    width: 18px; height: 18px; accent-color: #1a9e7a; flex-shrink: 0; margin-top: 2px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: linear-gradient(90deg, #1a9e7a, #17b87a);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 18px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-submit.active { opacity: 1; pointer-events: all; }
+
+  /* ===== SUCCESS PAGE ===== */
+  .success-card {
+    background: white;
+    border-radius: 18px;
+    padding: 48px 28px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-top: 24px;
+  }
+
+  .success-icon { font-size: 56px; margin-bottom: 20px; }
+  .success-title { font-size: 22px; font-weight: 900; color: #111; margin-bottom: 12px; }
+  .success-desc { font-size: 14px; color: #666; line-height: 1.8; }
+
+  /* ===== LOADING ===== */
+  .loading-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(255,255,255,0.85);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .loading-overlay.show { display: flex; }
+
+  .spinner {
+    width: 40px; height: 40px;
+    border: 4px solid #d0e6f0;
+    border-top-color: #1a9e7a;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 
-<div id="overlay"><div class="spin"></div><span>提交中，請稍候…</span></div>
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div style="color:#1a6fa8;font-weight:700;font-size:15px;">送出中，請稍候…</div>
+</div>
 
-<div class="card">
-
-<!-- ══ S0: COVER ══ -->
-<div class="screen active" id="s0">
-  <div class="cover-hero">
-    <span class="cover-tag">🏢 富邦中辰 × 職涯探索計畫</span>
-    <h1>你知道自己在職場上<br>最值錢的特質是什麼嗎？</h1>
-    <p>這份測驗結合性格分析與工作價值觀，並導入真實職場經驗的AI分析，幫你找出職場優勢、盲點，以及你可能從沒考慮過的職涯方向。</p>
-    <div class="cover-stats">
-      <div class="cover-stat"><div class="cs-val">5分鐘</div><div class="cs-lbl">作答時間</div></div>
-      <div class="cover-stat"><div class="cs-val">16題</div><div class="cs-lbl">問題數量</div></div>
-      <div class="cover-stat"><div class="cs-val">1份</div><div class="cs-lbl">專屬報告</div></div>
+<!-- ==================== PAGE 0: LANDING ==================== -->
+<div class="page active" id="page-landing" style="max-width:480px;padding:0;">
+  <div class="landing-hero">
+    <div class="landing-badge">富邦中辰 × 職涯探索計畫</div>
+    <div class="landing-title">你知道自己在職場上最值錢的特質是什麼嗎？</div>
+    <div class="landing-desc">這份測驗結合性格分析與工作價值觀，並導入真實職場經驗的AI分析，幫你找出職場優勢、盲點，以及你可能從沒考慮過的職涯方向。</div>
+    <hr class="landing-divider">
+    <div class="landing-stats">
+      <div class="stat-item"><span class="stat-number">5分鐘</span><span class="stat-label">作答時間</span></div>
+      <div class="stat-item"><span class="stat-number">16題</span><span class="stat-label">問題數量</span></div>
+      <div class="stat-item"><span class="stat-number">1份</span><span class="stat-label">專屬報告</span></div>
     </div>
   </div>
-  <div class="cover-body">
-    <p class="cover-desc">不管你有沒有想過金融業或業務相關工作，這份測驗都值得你花 5 分鐘完成。<br><br><span class="cover-link">填完後你會拿到一份專屬的職涯分析報告。</span></p>
-    <button class="btn btn-blue" onclick="go(1)">開始測驗 →</button>
+  <div style="padding:0 16px;">
+    <div class="landing-card">
+      <p>不管你有沒有想過金融業或業務相關工作，這份測驗都值得你花 5 分鐘填完。</p>
+      <p class="highlight">填完後你會拿到一份專屬的職涯分析報告。</p>
+    </div>
+    <button class="btn-start" onclick="goTo('page-basic')">開始測驗 →</button>
   </div>
 </div>
 
-<!-- ══ S1: 基本資料 ══ -->
-<div class="screen" id="s1">
-  <div class="hdr"><span class="hdr-label"></span></div>
-  <button class="back-btn" onclick="go(0)">← 回到首頁</button>
-  <div class="body">
-    <span class="part-pill pill-teal">📋 基本資料</span>
-    <div>
-      <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;">請先填寫以下資訊</div>
-      <div style="font-size:12.5px;color:var(--text-light);">填寫基本資料有助於讓你的報告內容更精準</div>
+<!-- ==================== PAGE 1: BASIC INFO ==================== -->
+<div class="page" id="page-basic" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goTo('page-landing')">← 上一頁</button></div>
+  <div class="basic-info-card">
+    <div class="section-tag">📋 基本資料</div>
+    <div class="basic-info-title">請先填寫以下資訊</div>
+    <div class="basic-info-desc">這些基本資料有助於讓你的報告內容更精準</div>
+    <div class="form-group">
+      <label class="form-label">就讀學校 <span class="required">*</span></label>
+      <input class="form-input" id="school" type="text" placeholder="學校" oninput="checkBasicForm()">
     </div>
     <div class="form-group">
-      <label class="form-lbl">就讀學校 <span class="form-req">*</span></label>
-      <input type="text" id="f_school" placeholder="例：台灣大學">
+      <label class="form-label">科系 <span class="required">*</span></label>
+      <input class="form-input" id="department" type="text" placeholder="科系" oninput="checkBasicForm()">
     </div>
     <div class="form-group">
-      <label class="form-lbl">科系 <span class="form-req">*</span></label>
-      <input type="text" id="f_dept" placeholder="例：財務金融系">
+      <label class="form-label">年級 <span class="required">*</span></label>
+      <input class="form-input" id="grade" type="text" placeholder="年級" oninput="checkBasicForm()">
     </div>
     <div class="form-group">
-      <label class="form-lbl">年級 <span class="form-req">*</span></label>
-      <input type="text" id="f_grade" placeholder="例：大三">
+      <label class="form-label">MBTI（選填）</label>
+      <input class="form-input" id="mbti" type="text" placeholder="例：INTJ、ENFP－若不清楚可略過">
+    </div>
+    <button class="btn-proceed" id="btnProceed" onclick="goTo('page-p1-intro')">填好了，開始測驗 →</button>
+  </div>
+</div>
+
+<!-- ==================== PAGE 2: PART 1 INTRO ==================== -->
+<div class="page" id="page-p1-intro" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goTo('page-basic')">← 上一頁</button></div>
+  <div id="pb-p1-intro"></div>
+  <div class="section-intro-card">
+    <div class="section-intro-icon">💎</div>
+    <div class="section-intro-title">PART 1｜你重視什麼？</div>
+    <div class="section-intro-subtitle">工作價值觀</div>
+  </div>
+  <button class="btn-begin" onclick="goTo('page-q1')">開始作答 →</button>
+</div>
+
+<!-- ==================== Q1 ==================== -->
+<div class="page" id="page-q1" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q1')">← 上一頁</button></div>
+  <div id="pb-q1"></div>
+  <div class="question-card">
+    <div class="question-part-tag">💎 PART 1｜你重視什麼？</div>
+    <div class="question-number">Q1</div>
+    <div class="question-text">如果工作性質可以自選，你最在意哪個？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q1">
+      <button class="option-btn" onclick="selectSingle('q1','A',this)"><span class="opt-label">A</span><span class="opt-text">工作時間穩定，下班就是下班</span></button>
+      <button class="option-btn" onclick="selectSingle('q1','B',this)"><span class="opt-label">B</span><span class="opt-text">做出成績，會被看見、被肯定</span></button>
+      <button class="option-btn" onclick="selectSingle('q1','C',this)"><span class="opt-label">C</span><span class="opt-text">收入有機會隨付出而大幅成長</span></button>
+      <button class="option-btn" onclick="selectSingle('q1','D',this)"><span class="opt-label">D</span><span class="opt-text">工作內容是我真正有興趣的事</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q1" onclick="goTo('page-q2')">下一題 →</button>
+</div>
+
+<!-- ==================== Q2 ==================== -->
+<div class="page" id="page-q2" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q2')">← 上一頁</button></div>
+  <div id="pb-q2"></div>
+  <div class="question-card">
+    <div class="question-part-tag">💎 PART 1｜你重視什麼？</div>
+    <div class="question-number">Q2</div>
+    <div class="question-text">你對「收入不固定、靠自己表現決定薪水」這件事，直覺反應是？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q2">
+      <button class="option-btn" onclick="selectSingle('q2','A',this)"><span class="opt-label">A</span><span class="opt-text">很抗拒，我需要穩定與安全感</span></button>
+      <button class="option-btn" onclick="selectSingle('q2','B',this)"><span class="opt-label">B</span><span class="opt-text">有點擔心，但如果上限高我願意試試</span></button>
+      <button class="option-btn" onclick="selectSingle('q2','C',this)"><span class="opt-label">C</span><span class="opt-text">還好，我本來就對自己有信心</span></button>
+      <button class="option-btn" onclick="selectSingle('q2','D',this)"><span class="opt-label">D</span><span class="opt-text">很嚮往，確定薪水反而讓我沒動力</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q2" onclick="goTo('page-q3')">下一題 →</button>
+</div>
+
+<!-- ==================== Q3 ==================== -->
+<div class="page" id="page-q3" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q3')">← 上一頁</button></div>
+  <div id="pb-q3"></div>
+  <div class="question-card">
+    <div class="question-part-tag">💎 PART 1｜你重視什麼？</div>
+    <div class="question-number">Q3</div>
+    <div class="question-text">你理想中「有成就感的時刻」最像哪一個？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q3">
+      <button class="option-btn" onclick="selectSingle('q3','A',this)"><span class="opt-label">A</span><span class="opt-text">完成一個複雜的專案，看到完整成果</span></button>
+      <button class="option-btn" onclick="selectSingle('q3','B',this)"><span class="opt-label">B</span><span class="opt-text">幫助某人解決了一個真實的困難</span></button>
+      <button class="option-btn" onclick="selectSingle('q3','C',this)"><span class="opt-label">C</span><span class="opt-text">說服別人接受我的想法或建議</span></button>
+      <button class="option-btn" onclick="selectSingle('q3','D',this)"><span class="opt-label">D</span><span class="opt-text">學到新東西，感覺自己變強了</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q3" onclick="goTo('page-q4')">下一題 →</button>
+</div>
+
+<!-- ==================== Q4 (RANK) ==================== -->
+<div class="page" id="page-q4" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q4')">← 上一頁</button></div>
+  <div id="pb-q4"></div>
+  <div class="question-card">
+    <div class="question-part-tag">💎 PART 1｜你重視什麼？</div>
+    <div class="question-number">Q4</div>
+    <div class="question-text">請將以下工作條件，依照重視程度選出前三名</div>
+    <div class="question-type-hint">👆 依你點選最重視的 3 個（點選順序即為排名）</div>
+    <div class="options-list" id="opts-q4">
+      <button class="option-btn" onclick="selectRank('q4','收入高低',this)"><span class="opt-label">　</span><span class="opt-text">收入高低</span></button>
+      <button class="option-btn" onclick="selectRank('q4','時間自由度',this)"><span class="opt-label">　</span><span class="opt-text">時間自由度</span></button>
+      <button class="option-btn" onclick="selectRank('q4','工作穩定性',this)"><span class="opt-label">　</span><span class="opt-text">工作穩定性</span></button>
+      <button class="option-btn" onclick="selectRank('q4','成就感與被肯定',this)"><span class="opt-label">　</span><span class="opt-text">成就感與被肯定</span></button>
+      <button class="option-btn" onclick="selectRank('q4','人際關係與團隊氣氛',this)"><span class="opt-label">　</span><span class="opt-text">人際關係與團隊氣氛</span></button>
+      <button class="option-btn" onclick="selectRank('q4','學習與成長空間',this)"><span class="opt-label">　</span><span class="opt-text">學習與成長空間</span></button>
+      <button class="option-btn" onclick="selectRank('q4','社會影響力/幫助他人',this)"><span class="opt-label">　</span><span class="opt-text">社會影響力／幫助他人</span></button>
+    </div>
+    <div class="rank-counter" id="rank-counter-q4">已選 0／3 完成！</div>
+  </div>
+  <button class="btn-next" id="next-q4" onclick="goTo('page-p2-intro')">下一題 →</button>
+</div>
+
+<!-- ==================== PAGE: PART 2 INTRO ==================== -->
+<div class="page" id="page-p2-intro" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-p2-intro')">← 上一頁</button></div>
+  <div id="pb-p2-intro"></div>
+  <div class="section-intro-card" style="background:linear-gradient(145deg,#1a6fa8,#2563a8);">
+    <div class="section-intro-icon">🔍</div>
+    <div class="section-intro-title">PART 2｜你是什麼樣的人？</div>
+    <div class="section-intro-subtitle">性格傾向</div>
+  </div>
+  <button class="btn-begin" onclick="goTo('page-q5')">開始作答 →</button>
+</div>
+
+<!-- ==================== Q5 (MULTI 1-2) ==================== -->
+<div class="page" id="page-q5" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q5')">← 上一頁</button></div>
+  <div id="pb-q5"></div>
+  <div class="question-card">
+    <div class="question-part-tag">🔍 PART 2｜你是什麼樣的人？</div>
+    <div class="question-number">Q5</div>
+    <div class="question-text">朋友通常怎麼形容你？</div>
+    <div class="question-type-hint">☑️ 最多選 2 個</div>
+    <div class="options-list" id="opts-q5">
+      <button class="option-btn" onclick="selectMulti('q5',this,2)"><span class="opt-checkbox"></span><span class="opt-text">很愛聊天，跟誰都能熟絡</span></button>
+      <button class="option-btn" onclick="selectMulti('q5',this,2)"><span class="opt-checkbox"></span><span class="opt-text">做事很可靠，交代的事一定完成</span></button>
+      <button class="option-btn" onclick="selectMulti('q5',this,2)"><span class="opt-checkbox"></span><span class="opt-text">有自己的想法，不太被影響</span></button>
+      <button class="option-btn" onclick="selectMulti('q5',this,2)"><span class="opt-checkbox"></span><span class="opt-text">觀察力強，能感覺到別人的情緒變化</span></button>
+      <button class="option-btn" onclick="selectMulti('q5',this,2)"><span class="opt-checkbox"></span><span class="opt-text">目標感強，做事有衝勁</span></button>
+    </div>
+    <div class="rank-counter" id="rank-counter-q5">已選 1／2</div>
+  </div>
+  <button class="btn-next" id="next-q5" onclick="goTo('page-q6')">下一題 →</button>
+</div>
+
+<!-- ==================== Q6 ==================== -->
+<div class="page" id="page-q6" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q6')">← 上一頁</button></div>
+  <div id="pb-q6"></div>
+  <div class="question-card">
+    <div class="question-part-tag">🔍 PART 2｜你是什麼樣的人？</div>
+    <div class="question-number">Q6</div>
+    <div class="question-text">面對陌生人，你通常？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q6">
+      <button class="option-btn" onclick="selectSingle('q6','A',this)"><span class="opt-label">A</span><span class="opt-text">主動開口，我喜歡認識新朋友</span></button>
+      <button class="option-btn" onclick="selectSingle('q6','B',this)"><span class="opt-label">B</span><span class="opt-text">等對方先說話，但聊開了也很自在</span></button>
+      <button class="option-btn" onclick="selectSingle('q6','C',this)"><span class="opt-label">C</span><span class="opt-text">有點保留，需要時間才會放鬆</span></button>
+      <button class="option-btn" onclick="selectSingle('q6','D',this)"><span class="opt-label">D</span><span class="opt-text">依情況，看對方是什麼類型的人</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q6" onclick="goTo('page-q7')">下一題 →</button>
+</div>
+
+<!-- ==================== Q7 ==================== -->
+<div class="page" id="page-q7" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q7')">← 上一頁</button></div>
+  <div id="pb-q7"></div>
+  <div class="question-card">
+    <div class="question-part-tag">🔍 PART 2｜你是什麼樣的人？</div>
+    <div class="question-number">Q7</div>
+    <div class="question-text">哪個情境，你覺得自己是最心應手？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q7">
+      <button class="option-btn" onclick="selectSingle('q7','A',this)"><span class="opt-label">A</span><span class="opt-text">向一群人報告，台上說明一個提案</span></button>
+      <button class="option-btn" onclick="selectSingle('q7','B',this)"><span class="opt-label">B</span><span class="opt-text">一對一深談，了解對方的需求和想法</span></button>
+      <button class="option-btn" onclick="selectSingle('q7','C',this)"><span class="opt-label">C</span><span class="opt-text">獨立研究，整理出一份完整的分析</span></button>
+      <button class="option-btn" onclick="selectSingle('q7','D',this)"><span class="opt-label">D</span><span class="opt-text">協調多方，讓事情順利往前推進</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q7" onclick="goTo('page-q8')">下一題 →</button>
+</div>
+
+<!-- ==================== Q8 ==================== -->
+<div class="page" id="page-q8" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q8')">← 上一頁</button></div>
+  <div id="pb-q8"></div>
+  <div class="question-card">
+    <div class="question-part-tag">🔍 PART 2｜你是什麼樣的人？</div>
+    <div class="question-number">Q8</div>
+    <div class="question-text">你剛入職一個月，壓力比預期大很多。你會？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q8">
+      <button class="option-btn" onclick="selectSingle('q8','A',this)"><span class="opt-label">A</span><span class="opt-text">主動找主管聊，問怎麼調整方向</span></button>
+      <button class="option-btn" onclick="selectSingle('q8','B',this)"><span class="opt-label">B</span><span class="opt-text">自己研究，找出問題在哪</span></button>
+      <button class="option-btn" onclick="selectSingle('q8','C',this)"><span class="opt-label">C</span><span class="opt-text">先撐著，觀察同事怎麼做</span></button>
+      <button class="option-btn" onclick="selectSingle('q8','D',this)"><span class="opt-label">D</span><span class="opt-text">認真評估這份工作適不適合自己繼續</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q8" onclick="goTo('page-p3-intro')">下一題 →</button>
+</div>
+
+<!-- ==================== PART 3 INTRO ==================== -->
+<div class="page" id="page-p3-intro" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-p3-intro')">← 上一頁</button></div>
+  <div id="pb-p3-intro"></div>
+  <div class="section-intro-card" style="background:linear-gradient(145deg,#1a8a5a,#17b87a);">
+    <div class="section-intro-icon">🎯</div>
+    <div class="section-intro-title">PART 3｜你怎麼看工作？</div>
+    <div class="section-intro-subtitle">情境題</div>
+  </div>
+  <button class="btn-begin" onclick="goTo('page-q9')">開始作答 →</button>
+</div>
+
+<!-- ==================== Q9 ==================== -->
+<div class="page" id="page-q9" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q9')">← 上一頁</button></div>
+  <div id="pb-q9"></div>
+  <div class="question-card">
+    <div class="question-part-tag">🎯 PART 3｜你怎麼看工作？</div>
+    <div class="question-number">Q9</div>
+    <div class="question-text">你花了兩週準備一份提案，最後遭到駁回。你最真實的反應是？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q9">
+      <button class="option-btn" onclick="selectSingle('q9','A',this)"><span class="opt-label">A</span><span class="opt-text">很失落，但想知道原因</span></button>
+      <button class="option-btn" onclick="selectSingle('q9','B',this)"><span class="opt-label">B</span><span class="opt-text">有點氣，但冷靜後會重整旗鼓</span></button>
+      <button class="option-btn" onclick="selectSingle('q9','C',this)"><span class="opt-label">C</span><span class="opt-text">很正常，馬上思考下一個提案</span></button>
+      <button class="option-btn" onclick="selectSingle('q9','D',this)"><span class="opt-label">D</span><span class="opt-text">懷疑這份工作適不適合自己</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q9" onclick="goTo('page-q10')">下一題 →</button>
+</div>
+
+<!-- ==================== Q10 ==================== -->
+<div class="page" id="page-q10" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q10')">← 上一頁</button></div>
+  <div id="pb-q10"></div>
+  <div class="question-card">
+    <div class="question-part-tag">🎯 PART 3｜你怎麼看工作？</div>
+    <div class="question-number">Q10</div>
+    <div class="question-text">五年後，你希望望自己在職場上的角色是？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q10">
+      <button class="option-btn" onclick="selectSingle('q10','A',this)"><span class="opt-label">A</span><span class="opt-text">獨當一面的工作者，靠自己的能力與經驗提高收入</span></button>
+      <button class="option-btn" onclick="selectSingle('q10','B',this)"><span class="opt-label">B</span><span class="opt-text">帶領一個團隊，培養其他人一起成長</span></button>
+      <button class="option-btn" onclick="selectSingle('q10','C',this)"><span class="opt-label">C</span><span class="opt-text">還沒想到那麼遠，先把眼前做好</span></button>
+      <button class="option-btn" onclick="selectSingle('q10','D',this)"><span class="opt-label">D</span><span class="opt-text">往管理或策略方向走，不一定要在第一線</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q10" onclick="goTo('page-p4-intro')">下一題 →</button>
+</div>
+
+<!-- ==================== PART 4 INTRO ==================== -->
+<div class="page" id="page-p4-intro" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-p4-intro')">← 上一頁</button></div>
+  <div id="pb-p4-intro"></div>
+  <div class="section-intro-card" style="background:linear-gradient(145deg,#1a5fa8,#1a6fa8);">
+    <div class="section-intro-icon">💼</div>
+    <div class="section-intro-title">PART 4｜關於業務工作</div>
+    <div class="section-intro-subtitle">你的真實想法</div>
+  </div>
+  <button class="btn-begin" onclick="goTo('page-q11')">開始作答 →</button>
+</div>
+
+<!-- ==================== Q11 ==================== -->
+<div class="page" id="page-q11" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q11')">← 上一頁</button></div>
+  <div id="pb-q11"></div>
+  <div class="question-card">
+    <div class="question-part-tag">💼 PART 4｜關於業務工作</div>
+    <div class="question-number">Q11</div>
+    <div class="question-text">說到「業務工作」，你腦中第一個浮現的感覺是？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q11">
+      <button class="option-btn" onclick="selectSingle('q11','A',this)"><span class="opt-label">A</span><span class="opt-text">很有挑戰性，但不確定是否能勝任</span></button>
+      <button class="option-btn" onclick="selectSingle('q11','B',this)"><span class="opt-label">B</span><span class="opt-text">很個性，我不確定自己適不適合</span></button>
+      <button class="option-btn" onclick="selectSingle('q11','C',this)"><span class="opt-label">C</span><span class="opt-text">感覺很會說話才能做</span></button>
+      <button class="option-btn" onclick="selectSingle('q11','D',this)"><span class="opt-label">D</span><span class="opt-text">我從來沒認真考慮過這個方向</span></button>
+      <button class="option-btn" onclick="selectSingle('q11','E',this)"><span class="opt-label">E</span><span class="opt-text">我本來就有興趣或正在考慮</span></button>
+      <button class="option-btn" onclick="selectSingle('q11','F',this)"><span class="opt-label">F</span><span class="opt-text">其他</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q11" onclick="goTo('page-q12')">下一題 →</button>
+</div>
+
+<!-- ==================== Q12 (MULTI checkbox up to 6) ==================== -->
+<div class="page" id="page-q12" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q12')">← 上一頁</button></div>
+  <div id="pb-q12"></div>
+  <div class="question-card">
+    <div class="question-part-tag">💼 PART 4｜關於業務工作</div>
+    <div class="question-number">Q12</div>
+    <div class="question-text">你覺得「業務」這個職位最讓你卻步的是？</div>
+    <div class="question-type-hint">☑️ 可複選，選有共鳴的選項</div>
+    <div class="options-list" id="opts-q12">
+      <button class="option-btn" onclick="selectMulti('q12',this,6)"><span class="opt-checkbox"></span><span class="opt-text">收入不確定</span></button>
+      <button class="option-btn" onclick="selectMulti('q12',this,6)"><span class="opt-checkbox"></span><span class="opt-text">業績壓力太大</span></button>
+      <button class="option-btn" onclick="selectMulti('q12',this,6)"><span class="opt-checkbox"></span><span class="opt-text">感覺像在強迫別人</span></button>
+      <button class="option-btn" onclick="selectMulti('q12',this,6)"><span class="opt-checkbox"></span><span class="opt-text">不知道業務實際要做什麼</span></button>
+      <button class="option-btn" onclick="selectMulti('q12',this,6)"><span class="opt-checkbox"></span><span class="opt-text">我沒有特別卻步</span></button>
+      <button class="option-btn" onclick="selectMulti('q12',this,6)" data-other="true"><span class="opt-checkbox"></span><span class="opt-text">其他</span></button>
+    </div>
+    <div id="other-q12-wrap" style="display:none;margin-top:6px;">
+      <input class="other-input" id="other-q12" type="text" placeholder="請填寫你的答案">
+    </div>
+  </div>
+  <button class="btn-next" id="next-q12" onclick="goTo('page-q13')">下一題 →</button>
+</div>
+
+<!-- ==================== Q13 ==================== -->
+<div class="page" id="page-q13" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q13')">← 上一頁</button></div>
+  <div id="pb-q13"></div>
+  <div class="question-card">
+    <div class="question-part-tag">💼 PART 4｜關於業務工作</div>
+    <div class="question-number">Q13</div>
+    <div class="question-text">如果有機會，你願意花 30 分鐘深入了解業務工作的哪些內容？</div>
+    <div class="question-type-hint">🔘 單選</div>
+    <div class="options-list" id="opts-q13">
+      <button class="option-btn" onclick="selectSingle('q13','A',this)"><span class="opt-label">A</span><span class="opt-text">業務的真實工作內容與收入結構</span></button>
+      <button class="option-btn" onclick="selectSingle('q13','B',this)"><span class="opt-label">B</span><span class="opt-text">富邦金控的優勢是什麼</span></button>
+      <button class="option-btn" onclick="selectSingle('q13','C',this)"><span class="opt-label">C</span><span class="opt-text">晉升與主管培育的機會</span></button>
+      <button class="option-btn" onclick="selectSingle('q13','D',this)"><span class="opt-label">D</span><span class="opt-text">我對業務工作還沒興趣，先看看報告再說</span></button>
+      <button class="option-btn" onclick="selectSingle('q13','E',this)"><span class="opt-label">E</span><span class="opt-text">都有興趣，看過報告後我會更清楚</span></button>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q13" onclick="goTo('page-q14')">下一題 →</button>
+</div>
+
+<!-- ==================== Q14 ==================== -->
+<div class="page" id="page-q14" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q14')">← 上一頁</button></div>
+  <div id="pb-q14"></div>
+  <div class="question-card">
+    <div class="question-part-tag">💼 PART 4｜關於業務工作</div>
+    <div class="question-number">Q14</div>
+    <div class="question-text">你有過哪些特別的經歷或能力？或是你發現自己哪裡和別人不一樣？</div>
+    <div class="question-type-hint">💡 可以是課業、打工、社團、人際關係、或個性、習慣、思維方式等</div>
+    <div style="margin-top:8px;">
+      <textarea class="form-input" id="ans-q14" rows="4" placeholder="隨便寫，越真實越好～" style="resize:none;line-height:1.7;" oninput="checkTextarea('q14','next-q14')"></textarea>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q14" onclick="goTo('page-q15')">下一題 →</button>
+</div>
+
+<!-- ==================== PART 5 INTRO ==================== -->
+<div class="page" id="page-p5-intro" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-p5-intro')">← 上一頁</button></div>
+  <div id="pb-p5-intro"></div>
+  <div class="section-intro-card" style="background:linear-gradient(145deg,#1a8a5a,#17b87a);">
+    <div class="section-intro-icon">✏️</div>
+    <div class="section-intro-title">PART 5｜用你自己的話說</div>
+    <div class="section-intro-subtitle">開放填寫</div>
+  </div>
+  <button class="btn-begin" onclick="goTo('page-q15')">開始作答 →</button>
+</div>
+
+<!-- ==================== Q15 ==================== -->
+<div class="page" id="page-q15" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q15')">← 上一頁</button></div>
+  <div id="pb-q15"></div>
+  <div class="question-card">
+    <div class="question-part-tag">✏️ PART 5｜用你自己的話說</div>
+    <div class="question-number">Q15</div>
+    <div class="question-text">畢業後三到五年，你希望自己的生活或工作狀態是什麼樣子？</div>
+    <div class="question-type-hint">💡 可以描述生活方式、工作感受、收入目標都行</div>
+    <div style="margin-top:8px;">
+      <textarea class="form-input" id="ans-q15" rows="4" placeholder="隨便寫，不用很正式" style="resize:none;line-height:1.7;" oninput="checkTextarea('q15','next-q15')"></textarea>
+    </div>
+  </div>
+  <button class="btn-next" id="next-q15" onclick="goTo('page-q16')">略過，繼續 →</button>
+</div>
+
+<!-- ==================== Q16 ==================== -->
+<div class="page" id="page-q16" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goBack('page-q16')">← 上一頁</button></div>
+  <div id="pb-q16"></div>
+  <div class="question-card">
+    <div class="question-part-tag">✏️ PART 5｜用你自己的話說</div>
+    <div class="question-number">Q16</div>
+    <div class="question-text">對於業務或保險相關的工作，你心裡最大的擔憂或擔心是什麼？</div>
+    <div class="question-type-hint">💡 沒有問題也可以寫「還沒想過」或「不太了解」</div>
+    <div style="margin-top:8px;">
+      <textarea class="form-input" id="ans-q16" rows="4" placeholder="你的擔心是我們最想知道的事" style="resize:none;line-height:1.7;" oninput="checkTextarea('q16','next-q16')"></textarea>
+    </div>
+  </div>
+  <button class="btn-next active" id="next-q16" onclick="goTo('page-final')">略過，繼續 →</button>
+</div>
+
+<!-- ==================== FINAL PAGE ==================== -->
+<div class="page" id="page-final" style="max-width:480px;padding:16px;">
+  <div class="top-back-bar"><button class="btn-back" onclick="goTo('page-q16')">← 上一頁</button></div>
+
+  <!-- Contact info card -->
+  <div class="basic-info-card" style="margin-bottom:14px;">
+    <div class="section-tag" style="background:#e8f5e9;color:#2e7d32;">🎁 留下你的資料</div>
+    <div class="basic-info-title" style="margin-bottom:6px;">讓我們把報告送給你</div>
+    <div class="basic-info-desc">完成測驗後，你將透過 Email 收到專屬的簡版職涯報告。不會有任何強迫推銷，請放心填寫。</div>
+    <div class="final-alert">請務必正確填寫，以確保能取得完整版報告以及證照補助金的通知。</div>
+
+    <div class="form-group">
+      <label class="form-label">姓名 <span class="required">*</span></label>
+      <input class="form-input" id="final-name" type="text" placeholder="你的名字" oninput="checkFinalForm()">
     </div>
     <div class="form-group">
-      <label class="form-lbl">MBTI（選填）</label>
-      <input type="text" id="f_mbti" placeholder="例：INTJ、ENFP，若不清楚可略過">
+      <label class="form-label">Email <span class="required">*</span></label>
+      <input class="form-input" id="final-email" type="email" placeholder="example@mail.com" oninput="checkFinalForm()">
     </div>
-    <div class="err" id="err-basic">請填寫必填欄位（學校、科系、年級）</div>
-    <button class="btn btn-teal" onclick="submitBasic()">填好了，開始測驗 →</button>
-  </div>
-</div>
-
-<!-- ══ S2: PART 1 Intro ══ -->
-<div class="screen" id="s2">
-  <div class="hdr"><span class="hdr-label">你重視什麼？</span><span class="hdr-count">1 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:6%"></div></div>
-  <button class="back-btn" onclick="go(1)">← 上一頁</button>
-  <div class="body" style="justify-content:center;gap:16px;">
-    <div class="part-intro pi-teal">
-      <span class="pi-emoji">💎</span>
-      <div class="pi-title">PART 1｜你重視什麼？</div>
-      <div class="pi-sub">工作價值觀</div>
+    <div class="form-group">
+      <label class="form-label">電話 <span class="required">*</span></label>
+      <input class="form-input" id="final-phone" type="tel" placeholder="09xxxxxxxx" oninput="checkFinalForm()">
     </div>
-    <button class="btn btn-teal" onclick="go(3)">開始作答 →</button>
-  </div>
-</div>
-
-<!-- ══ S3: Q1 ══ -->
-<div class="screen" id="s3">
-  <div class="hdr"><span class="hdr-label">你重視什麼？</span><span class="hdr-count">1 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:6%"></div></div>
-  <button class="back-btn" onclick="go(2)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-teal">💎 PART 1｜你重視什麼？</span>
-    <div class="q-num">Q1</div>
-    <div class="q-text">如果工作性質可以自己選，你最在意哪個？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q1">
-      <div class="opt" onclick="single('q1','A',this)"><span class="opt-ltr">A</span>工作時間穩定，下班就是下班<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q1','B',this)"><span class="opt-ltr">B</span>做出成績，會被看見、會被肯定<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q1','C',this)"><span class="opt-ltr">C</span>收入有機會隨付出而大幅成長<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q1','D',this)"><span class="opt-ltr">D</span>工作內容是我真正有興趣的事<span class="opt-chk">✓</span></div>
+    <div class="form-group">
+      <label class="form-label">LINE ID（選填）</label>
+      <input class="form-input" id="final-line" type="text" placeholder="選填">
     </div>
-    <div class="err" id="err-q1">請選擇一個選項</div>
-    <button class="btn btn-teal" onclick="nextS('q1',4)">下一題 →</button>
-  </div>
-</div>
 
-<!-- ══ S4: Q2 ══ -->
-<div class="screen" id="s4">
-  <div class="hdr"><span class="hdr-label">你重視什麼？</span><span class="hdr-count">2 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:12%"></div></div>
-  <button class="back-btn" onclick="go(3)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-teal">💎 PART 1｜你重視什麼？</span>
-    <div class="q-num">Q2</div>
-    <div class="q-text">你對「收入不固定、靠自己真實決定薪水」這件事，直覺反應是？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q2">
-      <div class="opt" onclick="single('q2','A',this)"><span class="opt-ltr">A</span>很抗拒，我需要穩定與安全感<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q2','B',this)"><span class="opt-ltr">B</span>有點擔心，但如果上限高我願意試試<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q2','C',this)"><span class="opt-ltr">C</span>還好，我本來就對自己有信心<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q2','D',this)"><span class="opt-ltr">D</span>很嚮往，穩定薪水反而讓我沒動力<span class="opt-chk">✓</span></div>
+    <div class="form-group">
+      <label class="form-label">希望額外了解（選填，可多選）</label>
+      <label class="checkbox-option" id="extra-1"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-1')"> 金融證照安排</label>
+      <label class="checkbox-option" id="extra-2"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-2')"> 工作座談會</label>
+      <label class="checkbox-option" id="extra-3"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-3')"> 工作體驗／實習</label>
+      <label class="checkbox-option" id="extra-4"><input type="checkbox" onchange="toggleCheckboxStyle(this,'extra-4')"> 正職／兼職工作說明</label>
     </div>
-    <div class="err" id="err-q2">請選擇一個選項</div>
-    <button class="btn btn-teal" onclick="nextS('q2',5)">下一題 →</button>
   </div>
-</div>
 
-<!-- ══ S5: Q3 ══ -->
-<div class="screen" id="s5">
-  <div class="hdr"><span class="hdr-label">你重視什麼？</span><span class="hdr-count">3 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:18%"></div></div>
-  <button class="back-btn" onclick="go(4)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-teal">💎 PART 1｜你重視什麼？</span>
-    <div class="q-num">Q3</div>
-    <div class="q-text">你理想中「有成就感的時刻」最像哪一個？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q3">
-      <div class="opt" onclick="single('q3','A',this)"><span class="opt-ltr">A</span>完成一個複雜的專案，看到完整成果<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q3','B',this)"><span class="opt-ltr">B</span>幫助某人解決了一個真實的困難<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q3','C',this)"><span class="opt-ltr">C</span>說服別人接受我的想法或建議<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q3','D',this)"><span class="opt-ltr">D</span>學到新東西，感覺自己變強了<span class="opt-chk">✓</span></div>
+  <!-- Referrer card -->
+  <div class="referrer-card">
+    <div class="referrer-tag">🤝 推薦人（選填）</div>
+    <div class="referrer-title">是誰推薦你填這個問卷的？</div>
+    <div class="referrer-desc">選填。填寫後推薦人可獲得抽獎與抽證照補助金的機會。</div>
+    <div class="form-group">
+      <label class="form-label">推薦人姓名</label>
+      <input class="form-input" id="ref-name" type="text" placeholder="">
     </div>
-    <div class="err" id="err-q3">請選擇一個選項</div>
-    <button class="btn btn-teal" onclick="nextS('q3',6)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S6: Q4 排序 ══ -->
-<div class="screen" id="s6">
-  <div class="hdr"><span class="hdr-label">你重視什麼？</span><span class="hdr-count">4 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:25%"></div></div>
-  <button class="back-btn" onclick="go(5)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-teal">💎 PART 1｜你重視什麼？</span>
-    <div class="q-num">Q4</div>
-    <div class="q-text">請將以下工作條件，依照重視程度選出前三名</div>
-    <div class="q-hint">👆 依你點選最重視的 3 個條件，點選順序即為排名 ✦</div>
-    <div class="opts" id="o-q4">
-      <div class="opt" onclick="rank(0,this)"><span class="opt-ltr" id="rl-0">—</span>收入高低<span class="opt-rank" id="rk-0"></span></div>
-      <div class="opt" onclick="rank(1,this)"><span class="opt-ltr" id="rl-1">—</span>時間自由度<span class="opt-rank" id="rk-1"></span></div>
-      <div class="opt" onclick="rank(2,this)"><span class="opt-ltr" id="rl-2">—</span>工作穩定性<span class="opt-rank" id="rk-2"></span></div>
-      <div class="opt" onclick="rank(3,this)"><span class="opt-ltr" id="rl-3">—</span>成就感與被肯定<span class="opt-rank" id="rk-3"></span></div>
-      <div class="opt" onclick="rank(4,this)"><span class="opt-ltr" id="rl-4">—</span>學習與成長空間<span class="opt-rank" id="rk-4"></span></div>
-      <div class="opt" onclick="rank(5,this)"><span class="opt-ltr" id="rl-5">—</span>社會影響力／幫助他人<span class="opt-rank" id="rk-5"></span></div>
+    <div class="form-group">
+      <label class="form-label">推薦人學校科系</label>
+      <input class="form-input" id="ref-dept" type="text" placeholder="">
     </div>
-    <div class="rank-done" id="rd-q4" style="display:none">已選 3/3 ✓ 完成！</div>
-    <div class="err" id="err-q4">請選出前三名</div>
-    <button class="btn btn-teal" onclick="nextRank(7)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S7: PART 2 Intro ══ -->
-<div class="screen" id="s7">
-  <div class="hdr"><span class="hdr-label">你是什麼樣的人？</span><span class="hdr-count">5 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:31%"></div></div>
-  <button class="back-btn" onclick="go(6)">← 上一頁</button>
-  <div class="body" style="justify-content:center;gap:16px;">
-    <div class="part-intro pi-blue">
-      <span class="pi-emoji">🔍</span>
-      <div class="pi-title">PART 2｜你是什麼樣的人？</div>
-      <div class="pi-sub">性格傾向</div>
+    <div class="referrer-highlight">
+      🎁 填寫推薦人後，推薦人可獲得抽獎資格，並取得證照補助金申請的優先通知機會。
     </div>
-    <button class="btn btn-blue" onclick="go(8)">開始作答 →</button>
   </div>
-</div>
 
-<!-- ══ S8: Q5 多選 ══ -->
-<div class="screen" id="s8">
-  <div class="hdr"><span class="hdr-label">你是什麼樣的人？</span><span class="hdr-count">5 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:31%"></div></div>
-  <button class="back-btn" onclick="go(7)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-blue">🔍 PART 2｜你是什麼樣的人？</span>
-    <div class="q-num">Q5</div>
-    <div class="q-text">朋友通常怎麼形容你？</div>
-    <div class="q-hint">👆 <span class="q-type">多選，最多 2 個</span></div>
-    <div class="opts" id="o-q5">
-      <div class="opt" onclick="multi('q5','很會聊天，跟誰都能熱絡',this,2)"><span class="opt-ltr">A</span>很會聊天，跟誰都能熱絡<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="multi('q5','做事很可靠，交代的事一定完成',this,2)"><span class="opt-ltr">B</span>做事很可靠，交代的事一定完成<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="multi('q5','有自己的想法，不太被影響',this,2)"><span class="opt-ltr">C</span>有自己的想法，不太被影響<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="multi('q5','觀察力強，能感覺到別人的情緒變化',this,2)"><span class="opt-ltr">D</span>觀察力強，能感覺到別人的情緒變化<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="multi('q5','目標感強，做事有衝勁',this,2)"><span class="opt-ltr">E</span>目標感強，做事有衝勁<span class="opt-chk">✓</span></div>
+  <!-- Privacy card -->
+  <div class="privacy-card">
+    <div class="privacy-title">個人資料保護聲明</div>
+    <div class="privacy-scroll">
+      依據《個人資料保護法》告知事項<br><br>
+      一、蒐集目的：富邦人壽保險股份有限公司中辰通訊處基於職涯探索計畫之執行、人才招募評估及後續聯繫之目的，蒐集您填寫之個人資料（含姓名、Email、電話、LINE ID 及測驗回答）。<br><br>
+      二、利用期間、地區及對象：資料將於計畫執行期間，於中華民國境內由本公司相關業務人員使用，不提供第三方。<br><br>
+      三、您得依個資法第三條行使查詢、更正、刪除等權利。<br><br>
+      四、若您不提供相關個人資料，將可能影響本公司提供職涯報告及後續服務之完整性。
     </div>
-    <div class="limit-note" id="lim-q5">已選 0 / 2</div>
-    <div class="err" id="err-q5">請至少選擇一個選項</div>
-    <button class="btn btn-blue" onclick="nextM('q5',9)">下一題 →</button>
+    <label class="privacy-agree">
+      <input type="checkbox" id="privacyCheck" onchange="checkFinalForm()">
+      本人已閱讀並同意上述個人資料保護聲明，同意富邦人壽保險股份有限公司中辰通訊處依上述目的蒐集、處理及利用本人之個人資料。
+    </label>
   </div>
+
+  <button class="btn-submit" id="btnSubmit" onclick="submitForm()">🚀 送出並取得我的職涯報告</button>
 </div>
 
-<!-- ══ S9: Q6 ══ -->
-<div class="screen" id="s9">
-  <div class="hdr"><span class="hdr-label">你是什麼樣的人？</span><span class="hdr-count">6 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:37%"></div></div>
-  <button class="back-btn" onclick="go(8)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-blue">🔍 PART 2｜你是什麼樣的人？</span>
-    <div class="q-num">Q6</div>
-    <div class="q-text">面對陌生人，你通常？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q6">
-      <div class="opt" onclick="single('q6','A',this)"><span class="opt-ltr">A</span>主動開口，我喜歡認識新朋友<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q6','B',this)"><span class="opt-ltr">B</span>等對方先說話，但聊開了也很自在<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q6','C',this)"><span class="opt-ltr">C</span>有點保留，需要時間才會放鬆<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q6','D',this)"><span class="opt-ltr">D</span>依情況，看對方是什麼類型的人<span class="opt-chk">✓</span></div>
-    </div>
-    <div class="err" id="err-q6">請選擇一個選項</div>
-    <button class="btn btn-blue" onclick="nextS('q6',10)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S10: Q7 ══ -->
-<div class="screen" id="s10">
-  <div class="hdr"><span class="hdr-label">你是什麼樣的人？</span><span class="hdr-count">7 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:43%"></div></div>
-  <button class="back-btn" onclick="go(9)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-blue">🔍 PART 2｜你是什麼樣的人？</span>
-    <div class="q-num">Q7</div>
-    <div class="q-text">哪個情境，你覺得自己最得心應手？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q7">
-      <div class="opt" onclick="single('q7','A',this)"><span class="opt-ltr">A</span>向一群人報告，台上說明一個提案<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q7','B',this)"><span class="opt-ltr">B</span>一對一深談，了解對方的需求和想法<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q7','C',this)"><span class="opt-ltr">C</span>獨立研究，整理出一份完整的分析<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q7','D',this)"><span class="opt-ltr">D</span>協調多方，讓事情順利往前推進<span class="opt-chk">✓</span></div>
-    </div>
-    <div class="err" id="err-q7">請選擇一個選項</div>
-    <button class="btn btn-blue" onclick="nextS('q7',11)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S11: PART 3 Intro ══ -->
-<div class="screen" id="s11">
-  <div class="hdr"><span class="hdr-label">你怎麼看工作？</span><span class="hdr-count">8 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:50%"></div></div>
-  <button class="back-btn" onclick="go(10)">← 上一頁</button>
-  <div class="body" style="justify-content:center;gap:16px;">
-    <div class="part-intro pi-red">
-      <span class="pi-emoji">🎯</span>
-      <div class="pi-title">PART 3｜你怎麼看工作？</div>
-      <div class="pi-sub">情境題</div>
-    </div>
-    <button class="btn btn-red" onclick="go(12)">開始作答 →</button>
-  </div>
-</div>
-
-<!-- ══ S12: Q8 ══ -->
-<div class="screen" id="s12">
-  <div class="hdr"><span class="hdr-label">你怎麼看工作？</span><span class="hdr-count">8 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:50%"></div></div>
-  <button class="back-btn" onclick="go(11)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-red">🎯 PART 3｜你怎麼看工作？</span>
-    <div class="q-num">Q8</div>
-    <div class="q-text">你剛入職一個月，壓力比預期大很多。你會？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q8">
-      <div class="opt" onclick="single('q8','A',this)"><span class="opt-ltr">A</span>主動找主管聊，問怎麼調整方向<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q8','B',this)"><span class="opt-ltr">B</span>自己研究，找出問題在哪<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q8','C',this)"><span class="opt-ltr">C</span>先撐著，觀察同事怎麼做<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q8','D',this)"><span class="opt-ltr">D</span>認真評估這份工作適不適合自己繼續<span class="opt-chk">✓</span></div>
-    </div>
-    <div class="err" id="err-q8">請選擇一個選項</div>
-    <button class="btn btn-red" onclick="nextS('q8',13)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S13: Q9 ══ -->
-<div class="screen" id="s13">
-  <div class="hdr"><span class="hdr-label">你怎麼看工作？</span><span class="hdr-count">9 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:56%"></div></div>
-  <button class="back-btn" onclick="go(12)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-red">🎯 PART 3｜你怎麼看工作？</span>
-    <div class="q-num">Q9</div>
-    <div class="q-text">你花了整週準備一份提案，最後遭到駁回。你最真實的反應是？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q9">
-      <div class="opt" onclick="single('q9','A',this)"><span class="opt-ltr">A</span>很失落，但想知道原因<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q9','B',this)"><span class="opt-ltr">B</span>有點生氣，但冷靜後會重整旗鼓<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q9','C',this)"><span class="opt-ltr">C</span>很正常，馬上思考下一個提案<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q9','D',this)"><span class="opt-ltr">D</span>懷疑這份工作適不適合自己<span class="opt-chk">✓</span></div>
-    </div>
-    <div class="err" id="err-q9">請選擇一個選項</div>
-    <button class="btn btn-red" onclick="nextS('q9',14)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S14: Q10 ══ -->
-<div class="screen" id="s14">
-  <div class="hdr"><span class="hdr-label">你怎麼看工作？</span><span class="hdr-count">10 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:62%"></div></div>
-  <button class="back-btn" onclick="go(13)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-red">🎯 PART 3｜你怎麼看工作？</span>
-    <div class="q-num">Q10</div>
-    <div class="q-text">五年後，你希望自己在職場上的角色是？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q10">
-      <div class="opt" onclick="single('q10','A',this)"><span class="opt-ltr">A</span>獨當一面的工作者，靠自己的能力與經驗提高收入<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q10','B',this)"><span class="opt-ltr">B</span>帶領一個團隊，培養其他人一起成長<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q10','C',this)"><span class="opt-ltr">C</span>還沒想到那麼遠，先把眼前做好<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q10','D',this)"><span class="opt-ltr">D</span>往管理或策略方向走，不一定要在第一線<span class="opt-chk">✓</span></div>
-    </div>
-    <div class="err" id="err-q10">請選擇一個選項</div>
-    <button class="btn btn-red" onclick="nextS('q10',15)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S15: PART 4 Intro ══ -->
-<div class="screen" id="s15">
-  <div class="hdr"><span class="hdr-label">關於業務工作</span><span class="hdr-count">11 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:68%"></div></div>
-  <button class="back-btn" onclick="go(14)">← 上一頁</button>
-  <div class="body" style="justify-content:center;gap:16px;">
-    <div class="part-intro pi-blue">
-      <span class="pi-emoji">💼</span>
-      <div class="pi-title">PART 4｜關於業務工作</div>
-      <div class="pi-sub">你的真實想法</div>
-    </div>
-    <button class="btn btn-blue" onclick="go(16)">開始作答 →</button>
-  </div>
-</div>
-
-<!-- ══ S16: Q11 ══ -->
-<div class="screen" id="s16">
-  <div class="hdr"><span class="hdr-label">關於業務工作</span><span class="hdr-count">11 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:68%"></div></div>
-  <button class="back-btn" onclick="go(15)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-blue">💼 PART 4｜關於業務工作</span>
-    <div class="q-num">Q11</div>
-    <div class="q-text">說到「業務工作」，你腦中第一個浮現的感覺是？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q11">
-      <div class="opt" onclick="single('q11','A',this)"><span class="opt-ltr">A</span>很有挑戰性，但不確定是否能勝任<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q11','B',this)"><span class="opt-ltr">B</span>很個性，我不確定自己適不適合<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q11','C',this)"><span class="opt-ltr">C</span>感覺很會說話才能做<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q11','D',this)"><span class="opt-ltr">D</span>我從來沒認真考慮過這個方向<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q11','E',this)"><span class="opt-ltr">E</span>我本來就有興趣或正在考慮<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q11','F',this)"><span class="opt-ltr">F</span>其他<span class="opt-chk">✓</span></div>
-    </div>
-    <div class="err" id="err-q11">請選擇一個選項</div>
-    <button class="btn btn-blue" onclick="nextS('q11',17)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S17: Q12 多選 ══ -->
-<div class="screen" id="s17">
-  <div class="hdr"><span class="hdr-label">關於業務工作</span><span class="hdr-count">12 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:75%"></div></div>
-  <button class="back-btn" onclick="go(16)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-blue">💼 PART 4｜關於業務工作</span>
-    <div class="q-num">Q12</div>
-    <div class="q-text">你覺得「業務」這個職位最讓你卻步的是？</div>
-    <div class="q-hint">👆 <span class="q-type">可複選，沒有也可選擇</span></div>
-    <div class="opts" id="o-q12">
-      <div class="opt" onclick="multiAny('q12','收入不確定',this)"><span class="opt-ltr">A</span>收入不確定<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="multiAny('q12','業績壓力太大',this)"><span class="opt-ltr">B</span>業績壓力太大<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="multiAny('q12','感覺像在強迫別人',this)"><span class="opt-ltr">C</span>感覺像在強迫別人<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="multiAny('q12','不知道業務需要到底是什麼',this)"><span class="opt-ltr">D</span>不知道業務需要到底是什麼<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="multiAny('q12','我沒有特別卻步',this)"><span class="opt-ltr">E</span>我沒有特別卻步<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="multiAny('q12','其他',this)"><span class="opt-ltr">F</span>其他<span class="opt-chk">✓</span></div>
-    </div>
-    <div class="limit-note" id="lim-q12">已選 0 / 6</div>
-    <div class="err" id="err-q12">請至少選擇一個選項</div>
-    <button class="btn btn-blue" onclick="nextM('q12',18)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S18: Q13 ══ -->
-<div class="screen" id="s18">
-  <div class="hdr"><span class="hdr-label">關於業務工作</span><span class="hdr-count">13 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:81%"></div></div>
-  <button class="back-btn" onclick="go(17)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-blue">💼 PART 4｜關於業務工作</span>
-    <div class="q-num">Q13</div>
-    <div class="q-text">如果有機會，你願意花 30 分鐘深入了解業務工作的哪些內容？</div>
-    <div class="q-hint">🏷️ <span class="q-type">單選</span></div>
-    <div class="opts" id="o-q13">
-      <div class="opt" onclick="single('q13','A',this)"><span class="opt-ltr">A</span>業務的真實工作內容與收入結構<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q13','B',this)"><span class="opt-ltr">B</span>富邦金控的優勢是什麼<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q13','C',this)"><span class="opt-ltr">C</span>晉升與主管培育的機會<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q13','D',this)"><span class="opt-ltr">D</span>我對業務工作還沒興趣，先看看報告再說<span class="opt-chk">✓</span></div>
-      <div class="opt" onclick="single('q13','E',this)"><span class="opt-ltr">E</span>都有興趣，看過報告後我會更清楚<span class="opt-chk">✓</span></div>
-    </div>
-    <div class="err" id="err-q13">請選擇一個選項</div>
-    <button class="btn btn-blue" onclick="nextS('q13',19)">下一題 →</button>
-  </div>
-</div>
-
-<!-- ══ S19: PART 5 Intro ══ -->
-<div class="screen" id="s19">
-  <div class="hdr"><span class="hdr-label">用你自己的話說</span><span class="hdr-count">14 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:87%"></div></div>
-  <button class="back-btn" onclick="go(18)">← 上一頁</button>
-  <div class="body" style="justify-content:center;gap:16px;">
-    <div class="part-intro pi-teal">
-      <span class="pi-emoji">✍️</span>
-      <div class="pi-title">PART 5｜用你自己的話說</div>
-      <div class="pi-sub">開放填寫</div>
-    </div>
-    <button class="btn btn-teal" onclick="go(20)">開始作答 →</button>
-  </div>
-</div>
-
-<!-- ══ S20: Q14 ══ -->
-<div class="screen" id="s20">
-  <div class="hdr"><span class="hdr-label">用你自己的話說</span><span class="hdr-count">14 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:87%"></div></div>
-  <button class="back-btn" onclick="go(19)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-green">✍️ PART 5｜用你自己的話說</span>
-    <div class="q-num">Q14</div>
-    <div class="q-text">你有過哪些特別的經歷或能力？或是你發現自己哪裡和別人不一樣？</div>
-    <div class="q-hint">💡 可以是課業、打工、社團、人際關係、或個性、習慣、思維方式等</div>
-    <textarea id="a-q14" placeholder="隨便寫，越真實越好～"></textarea>
-    <button class="btn btn-teal" onclick="saveFree('q14',21)">略過，繼續 →</button>
-  </div>
-</div>
-
-<!-- ══ S21: Q15 ══ -->
-<div class="screen" id="s21">
-  <div class="hdr"><span class="hdr-label">用你自己的話說</span><span class="hdr-count">15 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:93%"></div></div>
-  <button class="back-btn" onclick="go(20)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-green">✍️ PART 5｜用你自己的話說</span>
-    <div class="q-num">Q15</div>
-    <div class="q-text">畢業後三到五年，你希望自己的生活或工作狀態是什麼樣子？</div>
-    <div class="q-hint">💡 可以描述生活方式、工作感受、收入目標都行</div>
-    <textarea id="a-q15" placeholder="隨便寫，不用很正式"></textarea>
-    <button class="btn btn-teal" onclick="saveFree('q15',22)">略過，繼續 →</button>
-  </div>
-</div>
-
-<!-- ══ S22: Q16 ══ -->
-<div class="screen" id="s22">
-  <div class="hdr"><span class="hdr-label">用你自己的話說</span><span class="hdr-count">16 / 16</span></div>
-  <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
-  <button class="back-btn" onclick="go(21)">← 上一頁</button>
-  <div class="body">
-    <span class="part-pill pill-green">✍️ PART 5｜用你自己的話說</span>
-    <div class="q-num">Q16</div>
-    <div class="q-text">對於業務或保險相關的工作，你心裡最大的問題或擔心是什麼？</div>
-    <div class="q-hint">💡 沒有問題也可以寫「還沒想過」或「不太了解」</div>
-    <textarea id="a-q16" placeholder="你的擔心是我們最想知道的事"></textarea>
-    <button class="btn btn-teal" onclick="submitForm()">略過，繼續 →</button>
-  </div>
-</div>
-
-<!-- ══ S23: 完成 ══ -->
-<div class="screen" id="s23">
-  <div class="success">
+<!-- ==================== SUCCESS PAGE ==================== -->
+<div class="page" id="page-success" style="max-width:480px;padding:16px;">
+  <div class="success-card">
     <div class="success-icon">🎉</div>
     <div class="success-title">感謝你的填寫！</div>
-    <div class="success-desc">你的回答已經成功送出。<br>我們的團隊會根據你的答案，<br>為你準備一份專屬的職涯分析報告。<br><br><strong>期待很快和你分享結果！</strong></div>
+    <div class="success-desc">
+      你的職涯報告正在生成中。<br>
+      我們會盡快將專屬報告寄送到你的 Email。<br><br>
+      <strong>記得檢查信箱（含垃圾郵件）喔！</strong>
+    </div>
   </div>
-</div>
-
 </div>
 
 <script>
-// ── State ──
-const A = {
-  school:'',dept:'',grade:'',mbti:'',
-  q1:'',q2:'',q3:'',q4:[],
-  q5:[],q6:'',q7:'',
-  q8:'',q9:'',q10:'',
-  q11:'',q12:[],q13:'',
-  q14:'',q15:'',q16:''
+// ===== STATE =====
+const answers = {};
+const rankState = {};
+
+// Progress config: total visible question steps = 16
+// page -> [section name, current/total]
+const pageProgress = {
+  'page-q1':       ['你重視什麼？', 1, 16],
+  'page-q2':       ['你重視什麼？', 2, 16],
+  'page-q3':       ['你重視什麼？', 3, 16],
+  'page-q4':       ['你重視什麼？', 4, 16],
+  'page-p2-intro': ['你是什麼樣的人？', 4, 16],
+  'page-q5':       ['你是什麼樣的人？', 3, 16],
+  'page-q6':       ['你是什麼樣的人？', 6, 16],
+  'page-q7':       ['你是什麼樣的人？', 7, 16],
+  'page-q8':       ['你怎麼看工作？', 5, 16],
+  'page-p3-intro': ['你怎麼看工作？', 8, 16],
+  'page-q9':       ['你怎麼看工作？', 9, 16],
+  'page-q10':      ['你怎麼看工作？', 10, 16],
+  'page-p4-intro': ['關於業務工作', 10, 16],
+  'page-q11':      ['關於業務工作', 11, 16],
+  'page-q12':      ['關於業務工作', 8, 16],
+  'page-q13':      ['關於業務工作', 13, 16],
+  'page-q14':      ['用你自己的話說', 14, 16],
+  'page-p5-intro': ['用你自己的話說', 14, 16],
+  'page-q15':      ['用你自己的話說', 15, 16],
+  'page-q16':      ['用你自己的話說', 16, 16],
+  'page-final':    ['用你自己的話說', 16, 16],
 };
 
-// ── Navigate ──
-function go(n) {
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s'+n).classList.add('active');
+// Actual screen order for back navigation
+const pageOrder = [
+  'page-landing','page-basic','page-p1-intro',
+  'page-q1','page-q2','page-q3','page-q4',
+  'page-p2-intro','page-q5','page-q6','page-q7','page-q8',
+  'page-p3-intro','page-q9','page-q10',
+  'page-p4-intro','page-q11','page-q12','page-q13','page-q14',
+  'page-p5-intro','page-q15','page-q16',
+  'page-final','page-success'
+];
+
+function goTo(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
+  renderProgress(id);
 }
 
-// ── Basic ──
-function submitBasic() {
-  const s=document.getElementById('f_school').value.trim();
-  const d=document.getElementById('f_dept').value.trim();
-  const g=document.getElementById('f_grade').value.trim();
-  const err=document.getElementById('err-basic');
-  if(!s||!d||!g){err.style.display='block';return;}
-  err.style.display='none';
-  A.school=s; A.dept=d; A.grade=g;
-  A.mbti=document.getElementById('f_mbti').value.trim();
-  go(2);
+function goBack(currentId) {
+  const idx = pageOrder.indexOf(currentId);
+  if (idx > 0) goTo(pageOrder[idx - 1]);
 }
 
-// ── Single ──
-function single(k,v,el) {
-  A[k]=v;
-  el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
-  el.classList.add('sel');
-  const e=document.getElementById('err-'+k); if(e) e.style.display='none';
+function renderProgress(id) {
+  const cfg = pageProgress[id];
+  if (!cfg) return;
+  const [section, cur, total] = cfg;
+  const pct = Math.round((cur / total) * 100);
+  // find pb- container
+  const pbEl = document.getElementById('pb-' + id.replace('page-',''));
+  if (!pbEl) return;
+  pbEl.innerHTML = `
+    <div class="progress-header">
+      <span class="progress-section-name">${section}</span>
+      <span class="progress-counter">${cur} / ${total}</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+  `;
 }
 
-// ── Multi with max ──
-function multi(k,v,el,max) {
-  const arr=A[k];
-  if(el.classList.contains('sel')) {
-    el.classList.remove('sel');
-    const i=arr.indexOf(v); if(i>-1) arr.splice(i,1);
+// ===== SINGLE SELECT =====
+function selectSingle(qid, val, btn) {
+  answers[qid] = val;
+  const opts = btn.closest('.options-list').querySelectorAll('.option-btn');
+  opts.forEach(o => {
+    o.classList.remove('selected');
+    o.querySelector('.opt-label').innerHTML = o.querySelector('.opt-text').dataset.orig || o.querySelector('.opt-label').dataset.orig || o.querySelector('.opt-label').textContent;
+  });
+  btn.classList.add('selected');
+  btn.querySelector('.opt-label').innerHTML = '✓';
+  const nextBtn = document.getElementById('next-' + qid);
+  if (nextBtn) { nextBtn.classList.add('active'); }
+}
+
+// ===== RANK SELECT (up to 3) =====
+function selectRank(qid, val, btn) {
+  if (!rankState[qid]) rankState[qid] = [];
+  const state = rankState[qid];
+  const existIdx = state.indexOf(val);
+  if (existIdx !== -1) {
+    // deselect
+    state.splice(existIdx, 1);
+    btn.classList.remove('rank-selected');
+    const badge = btn.querySelector('.rank-badge');
+    if (badge) badge.remove();
+    btn.querySelector('.opt-label').style.display = 'flex';
+    // re-render all rank badges
+    rerenderRanks(qid);
   } else {
-    if(arr.length>=max) return;
-    el.classList.add('sel'); arr.push(v);
+    if (state.length >= 3) return;
+    state.push(val);
+    btn.classList.add('rank-selected');
+    btn.querySelector('.opt-label').style.display = 'none';
+    const badge = document.createElement('span');
+    badge.className = 'rank-badge';
+    badge.textContent = state.length;
+    btn.insertBefore(badge, btn.querySelector('.opt-text'));
   }
-  const lim=document.getElementById('lim-'+k);
-  if(lim) lim.textContent='已選 '+arr.length+' / '+max;
-  const e=document.getElementById('err-'+k); if(e) e.style.display='none';
+  answers[qid] = [...state];
+  const counter = document.getElementById('rank-counter-' + qid);
+  if (counter) counter.textContent = `已選 ${state.length}／3 完成！`;
+  const nextBtn = document.getElementById('next-' + qid);
+  if (nextBtn) {
+    if (state.length === 3) nextBtn.classList.add('active');
+    else nextBtn.classList.remove('active');
+  }
 }
 
-// ── Multi any ──
-function multiAny(k,v,el) {
-  const arr=A[k];
-  if(el.classList.contains('sel')) {
-    el.classList.remove('sel');
-    const i=arr.indexOf(v); if(i>-1) arr.splice(i,1);
-  } else {
-    el.classList.add('sel'); arr.push(v);
-  }
-  const total=el.closest('.opts').querySelectorAll('.opt').length;
-  const lim=document.getElementById('lim-'+k);
-  if(lim) lim.textContent='已選 '+arr.length+' / '+total;
-  const e=document.getElementById('err-'+k); if(e) e.style.display='none';
-}
-
-// ── Rank (Q4 only) ──
-const Q4_OPTS=['收入高低','時間自由度','工作穩定性','成就感與被肯定','學習與成長空間','社會影響力／幫助他人'];
-const RK_CLS=['rk1','rk2','rk3'];
-
-function rank(idx, el) {
-  const arr=A.q4;
-  const val=Q4_OPTS[idx];
-  if(el.classList.contains('sel')) {
-    const pos=arr.indexOf(val); if(pos>-1) arr.splice(pos,1);
-  } else {
-    if(arr.length>=3) return;
-    arr.push(val);
-  }
-  // re-render all 6
-  Q4_OPTS.forEach((_,i)=>{
-    const ltrEl=document.getElementById('rl-'+i);
-    const rkEl=document.getElementById('rk-'+i);
-    const optEl=document.querySelector('#o-q4 .opt:nth-child('+(i+1)+')');
-    const pos=arr.indexOf(Q4_OPTS[i]);
-    if(pos>-1) {
-      optEl.classList.add('sel');
-      ltrEl.textContent='';
-      rkEl.className='opt-rank show '+RK_CLS[pos];
-      rkEl.textContent=(pos+1)+'';
+function rerenderRanks(qid) {
+  const state = rankState[qid] || [];
+  const opts = document.querySelectorAll(`#opts-${qid} .option-btn`);
+  opts.forEach(btn => {
+    const val = btn.querySelector('.opt-text').textContent;
+    const idx = state.indexOf(val);
+    const existBadge = btn.querySelector('.rank-badge');
+    if (existBadge) existBadge.remove();
+    btn.querySelector('.opt-label').style.display = 'flex';
+    if (idx !== -1) {
+      btn.classList.add('rank-selected');
+      btn.querySelector('.opt-label').style.display = 'none';
+      const badge = document.createElement('span');
+      badge.className = 'rank-badge';
+      badge.textContent = idx + 1;
+      btn.insertBefore(badge, btn.querySelector('.opt-text'));
     } else {
-      optEl.classList.remove('sel');
-      ltrEl.textContent='—';
-      rkEl.className='opt-rank';
-      rkEl.textContent='';
+      btn.classList.remove('rank-selected');
     }
   });
-  const done=document.getElementById('rd-q4');
-  done.style.display=arr.length===3?'block':'none';
-  const e=document.getElementById('err-q4'); if(e) e.style.display='none';
 }
 
-// ── Next validators ──
-function nextS(k,next) {
-  if(!A[k]){document.getElementById('err-'+k).style.display='block';return;}
-  go(next);
-}
-function nextM(k,next) {
-  if(!A[k].length){document.getElementById('err-'+k).style.display='block';return;}
-  go(next);
-}
-function nextRank(next) {
-  if(A.q4.length<3){document.getElementById('err-q4').style.display='block';return;}
-  go(next);
-}
-function saveFree(k,next) {
-  A[k]=document.getElementById('a-'+k).value.trim(); go(next);
+// ===== MULTI SELECT =====
+function selectMulti(qid, btn, maxCount) {
+  const isOther = btn.getAttribute('data-other') === 'true';
+  const checked = btn.classList.contains('checked');
+
+  if (!answers[qid]) answers[qid] = [];
+  const val = btn.querySelector('.opt-text').textContent.trim();
+
+  if (checked) {
+    btn.classList.remove('checked');
+    btn.querySelector('.opt-checkbox').innerHTML = '';
+    answers[qid] = answers[qid].filter(v => v !== val);
+    if (isOther) {
+      const wrap = document.getElementById('other-' + qid + '-wrap');
+      if (wrap) wrap.style.display = 'none';
+    }
+  } else {
+    if (answers[qid].length >= maxCount) return;
+    btn.classList.add('checked');
+    btn.querySelector('.opt-checkbox').innerHTML = '✓';
+    answers[qid].push(val);
+    if (isOther) {
+      const wrap = document.getElementById('other-' + qid + '-wrap');
+      if (wrap) wrap.style.display = 'block';
+    }
+  }
+
+  // update counter if exists
+  const counter = document.getElementById('rank-counter-' + qid);
+  if (counter) counter.textContent = `已選 ${answers[qid].length}／${maxCount}`;
+
+  const nextBtn = document.getElementById('next-' + qid);
+  if (nextBtn) {
+    if (answers[qid].length > 0) nextBtn.classList.add('active');
+    else nextBtn.classList.remove('active');
+  }
 }
 
-// ── Submit ──
+// ===== TEXTAREA =====
+function checkTextarea(qid, nextId) {
+  // open text: always allow proceeding (略過), keep active by default
+  const nextBtn = document.getElementById(nextId);
+  if (nextBtn) nextBtn.classList.add('active');
+}
+
+// ===== BASIC FORM CHECK =====
+function checkBasicForm() {
+  const school = document.getElementById('school').value.trim();
+  const dept = document.getElementById('department').value.trim();
+  const grade = document.getElementById('grade').value.trim();
+  const btn = document.getElementById('btnProceed');
+  if (school && dept && grade) btn.classList.add('ready');
+  else btn.classList.remove('ready');
+}
+
+// ===== FINAL FORM CHECK =====
+function checkFinalForm() {
+  const name = document.getElementById('final-name').value.trim();
+  const email = document.getElementById('final-email').value.trim();
+  const phone = document.getElementById('final-phone').value.trim();
+  const privacy = document.getElementById('privacyCheck').checked;
+  const btn = document.getElementById('btnSubmit');
+  if (name && email && phone && privacy) btn.classList.add('active');
+  else btn.classList.remove('active');
+}
+
+function toggleCheckboxStyle(input, id) {
+  const label = document.getElementById(id);
+  if (input.checked) label.classList.add('checked');
+  else label.classList.remove('checked');
+}
+
+// ===== SUBMIT =====
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbziTMMocM9zjsbnqUXCvcAzufxZpZajy3yAvuGo7DxyQqLNj15ans0JwPIW0_XnT71-/exec'; // 替換為你的 GAS 部署網址
+
 async function submitForm() {
-  A.q16=document.getElementById('a-q16').value.trim();
-  document.getElementById('overlay').classList.add('show');
+  // Collect all data
+  const extraLearn = [];
+  if (document.getElementById('extra-1').querySelector('input').checked) extraLearn.push('金融證照安排');
+  if (document.getElementById('extra-2').querySelector('input').checked) extraLearn.push('工作座談會');
+  if (document.getElementById('extra-3').querySelector('input').checked) extraLearn.push('工作體驗／實習');
+  if (document.getElementById('extra-4').querySelector('input').checked) extraLearn.push('正職／兼職工作說明');
 
-  // ⚠️ 請將下方換成你的 Apps Script 部署網址
-  const SCRIPT_URL='YOUR_APPS_SCRIPT_URL_HERE';
+  // Q12 other
+  let q12ans = answers['q12'] ? [...answers['q12']] : [];
+  const otherQ12 = document.getElementById('other-q12').value.trim();
+  if (q12ans.includes('其他') && otherQ12) {
+    q12ans = q12ans.map(v => v === '其他' ? `其他：${otherQ12}` : v);
+  }
 
-  const payload={
-    timestamp:new Date().toISOString(),
-    school:A.school, dept:A.dept, grade:A.grade, mbti:A.mbti,
-    q1:A.q1, q2:A.q2, q3:A.q3,
-    q4_rank1:A.q4[0]||'', q4_rank2:A.q4[1]||'', q4_rank3:A.q4[2]||'',
-    q5:A.q5.join('、'), q6:A.q6, q7:A.q7,
-    q8:A.q8, q9:A.q9, q10:A.q10,
-    q11:A.q11, q12:A.q12.join('、'), q13:A.q13,
-    q14:A.q14, q15:A.q15, q16:A.q16,
+  const payload = {
+    timestamp: new Date().toLocaleString('zh-TW'),
+    school: document.getElementById('school').value.trim(),
+    department: document.getElementById('department').value.trim(),
+    grade: document.getElementById('grade').value.trim(),
+    mbti: document.getElementById('mbti').value.trim(),
+    name: document.getElementById('final-name').value.trim(),
+    email: document.getElementById('final-email').value.trim(),
+    phone: document.getElementById('final-phone').value.trim(),
+    lineId: document.getElementById('final-line').value.trim(),
+    extraLearn: extraLearn.join('、'),
+    refName: document.getElementById('ref-name').value.trim(),
+    refDept: document.getElementById('ref-dept').value.trim(),
+    q1: answers['q1'] || '',
+    q2: answers['q2'] || '',
+    q3: answers['q3'] || '',
+    q4: (answers['q4'] || []).join(' > '),
+    q5: (answers['q5'] || []).join('、'),
+    q6: answers['q6'] || '',
+    q7: answers['q7'] || '',
+    q8: answers['q8'] || '',
+    q9: answers['q9'] || '',
+    q10: answers['q10'] || '',
+    q11: answers['q11'] || '',
+    q12: q12ans.join('、'),
+    q13: answers['q13'] || '',
+    q14: document.getElementById('ans-q14').value.trim(),
+    q15: document.getElementById('ans-q15').value.trim(),
+    q16: document.getElementById('ans-q16').value.trim(),
   };
 
-  try {
-    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-  } catch(e){console.error(e);}
+  document.getElementById('loadingOverlay').classList.add('show');
 
-  document.getElementById('overlay').classList.remove('show');
-  go(23);
+  try {
+    await fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    document.getElementById('loadingOverlay').classList.remove('show');
+    goTo('page-success');
+  } catch (e) {
+    document.getElementById('loadingOverlay').classList.remove('show');
+    alert('送出時發生問題，請檢查網路後再試。');
+  }
 }
+
+// Init progress bars
+renderProgress('page-p1-intro');
 </script>
 </body>
 </html>
